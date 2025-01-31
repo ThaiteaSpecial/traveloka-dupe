@@ -1,0 +1,855 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"ratings": {
+				"__TYPE__": "FieldContent",
+				"value": "ago",
+				"type": "Text"
+			},
+			"type": {
+				"__TYPE__": "FieldContent",
+				"value": "villa",
+				"type": "Select"
+			},
+			"price": {
+				"__TYPE__": "FieldContent",
+				"value": "42",
+				"type": "Number"
+			},
+			"tags_guest": {
+				"__TYPE__": "FieldContent",
+				"value": "furniture",
+				"type": "Text"
+			},
+			"reviews": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "wherever",
+									"type": "Text"
+								}
+							],
+							[
+								"ratings",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "41",
+									"type": "Number"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Non esse id incididunt elit. Sunt fugiat incididunt ex veniam ut. Esse est irure adipisicing non consequat esse tempor excepteur deserunt cillum dolor ut proident aute sit."
+											}
+										}
+									]
+								}
+							],
+							[
+								"id_photos_review",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "68",
+									"type": "Number"
+								}
+							],
+							[
+								"tags",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "friendly_staff",
+									"type": "Select"
+								}
+							]
+						]
+					}
+				]
+			},
+			"review_ratings": {
+				"__TYPE__": "FieldContent",
+				"value": "82",
+				"type": "Number"
+			},
+			"facilities": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"facilities_list",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "audience",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"desc_hotel": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Magna ullamco consequat amet reprehenderit dolore ipsum."
+						}
+					}
+				]
+			},
+			"nearby_area": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"address",
+								{
+									"position": {
+										"lat": 48.8703712,
+										"lng": 2.3865198
+									},
+									"__TYPE__": "GeoPointContent"
+								}
+							],
+							[
+								"range",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "telephone",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"images": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"placeholder_images",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+										"width": 4272,
+										"height": 2848
+									},
+									"url": "https://images.unsplash.com/photo-1547082299-de196ea013d6",
+									"width": 4272,
+									"height": 2848,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			},
+			"rooms": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"free_cancel",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"free_breakfast",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"large_bed",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"id_rooms",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "90",
+									"type": "Number"
+								}
+							],
+							[
+								"wide_rooms",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "87",
+									"type": "Number"
+								}
+							],
+							[
+								"is_smoking",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"is_bathtube",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"is_refrigerator",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": false
+								}
+							],
+							[
+								"about_rooms",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Labore fugiat ea dolor sint."
+											}
+										}
+									]
+								}
+							],
+							[
+								"amenities",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Consectetur excepteur incididunt incididunt officia consequat nisi est sint ut enim elit elit nisi consectetur. In elit mollit dolor ad anim et in laboris labore proident occaecat."
+											}
+										}
+									]
+								}
+							],
+							[
+								"room_facilities",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Duis amet ea aute ut. Aute pariatur veniam mollit esse ad consequat sit fugiat magna et in sit."
+											}
+										}
+									]
+								}
+							],
+							[
+								"basic_facilities",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Reprehenderit esse et exercitation ea commodo id amet cillum ex dolor. Nostrud excepteur nisi qui velit adipisicing sint laborum Lorem adipisicing nostrud amet laborum deserunt. Nisi qui aliqua ullamco nulla occaecat consectetur laboris exercitation incididunt qui laboris reprehenderit exercitation."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
+			},
+			"images_rooms": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"images_rooms_placeholder",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+										"width": 3500,
+										"height": 2338
+									},
+									"url": "https://images.unsplash.com/photo-1448932223592-d1fc686e76ea",
+									"width": 3500,
+									"height": 2338,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"id_images_placeholder",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "54",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"rooms_options": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"id_room_options",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "79",
+									"type": "Number"
+								}
+							],
+							[
+								"title_room",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "aboard",
+									"type": "Text"
+								}
+							],
+							[
+								"sub_title_room",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "raise",
+									"type": "Text"
+								}
+							],
+							[
+								"bed_count",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "82",
+									"type": "Number"
+								}
+							],
+							[
+								"bed_type",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "twin bed",
+									"type": "Select"
+								}
+							],
+							[
+								"is_refund",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							],
+							[
+								"guest_count",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "73",
+									"type": "Number"
+								}
+							],
+							[
+								"tax_percentage",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "4",
+									"type": "Number"
+								}
+							],
+							[
+								"best_price",
+								{
+									"__TYPE__": "BooleanContent",
+									"value": true
+								}
+							],
+							[
+								"price",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "94",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"other_recomendation": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"name",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "string",
+									"type": "Text"
+								}
+							],
+							[
+								"rating",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "75",
+									"type": "Number"
+								}
+							],
+							[
+								"rating_point",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "38",
+									"type": "Number"
+								}
+							],
+							[
+								"rating_k",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "69",
+									"type": "Number"
+								}
+							],
+							[
+								"price",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "39",
+									"type": "Number"
+								}
+							],
+							[
+								"fee_price",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "11",
+									"type": "Number"
+								}
+							],
+							[
+								"location",
+								{
+									"position": {
+										"lat": 48.8703712,
+										"lng": 2.3865198
+									},
+									"__TYPE__": "GeoPointContent"
+								}
+							]
+						]
+					}
+				]
+			},
+			"policy_general": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"check_in_check_out",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "jump",
+									"type": "Text"
+								}
+							],
+							[
+								"deposit",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "curious",
+									"type": "Text"
+								}
+							],
+							[
+								"early_check_in",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "interest",
+									"type": "Text"
+								}
+							],
+							[
+								"late_check_out",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "control",
+									"type": "Text"
+								}
+							],
+							[
+								"extra_breakfast",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "noted",
+									"type": "Text"
+								}
+							],
+							[
+								"breakfast",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "mirror",
+									"type": "Text"
+								}
+							],
+							[
+								"pets",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "south",
+									"type": "Text"
+								}
+							],
+							[
+								"additional_policy",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "island",
+									"type": "Text"
+								}
+							],
+							[
+								"airport_transfer",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "crew",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"general_information": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"popular_facilities",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "sea",
+									"type": "Text"
+								}
+							],
+							[
+								"check_in_check_out_time",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "port",
+									"type": "Text"
+								}
+							],
+							[
+								"distance_to_downtown",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "fruit",
+									"type": "Text"
+								}
+							],
+							[
+								"popular_in_the_area",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "spread",
+									"type": "Text"
+								}
+							],
+							[
+								"breakfast_availability",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "divide",
+									"type": "Text"
+								}
+							],
+							[
+								"available_rooms",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "advice",
+									"type": "Text"
+								}
+							],
+							[
+								"number_of_floors",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "common",
+									"type": "Text"
+								}
+							],
+							[
+								"another_facilities",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "unhappy",
+									"type": "Text"
+								}
+							],
+							[
+								"nearby_point_of_interest",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "was",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"faq": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"avail_facility",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "tired",
+									"type": "Text"
+								}
+							],
+							[
+								"cost",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "original",
+									"type": "Text"
+								}
+							],
+							[
+								"check_in_check_out",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "musical",
+									"type": "Text"
+								}
+							],
+							[
+								"provide_breakfast",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "loud",
+									"type": "Text"
+								}
+							],
+							[
+								"type_rooms",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "vertical",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"ratings_section": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"fantastic",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "99",
+									"type": "Number"
+								}
+							],
+							[
+								"very_good",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "79",
+									"type": "Number"
+								}
+							],
+							[
+								"satisfying",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "42",
+									"type": "Number"
+								}
+							],
+							[
+								"average",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "31",
+									"type": "Number"
+								}
+							],
+							[
+								"poor",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "92",
+									"type": "Number"
+								}
+							],
+							[
+								"clean",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "65",
+									"type": "Number"
+								}
+							],
+							[
+								"comfort",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "63",
+									"type": "Number"
+								}
+							],
+							[
+								"meal",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "68",
+									"type": "Number"
+								}
+							],
+							[
+								"location",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "59",
+									"type": "Number"
+								}
+							],
+							[
+								"service",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "99",
+									"type": "Number"
+								}
+							]
+						]
+					}
+				]
+			},
+			"image_ratings": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"id_photos",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "84",
+									"type": "Number"
+								}
+							],
+							[
+								"images_photos",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9",
+										"width": 4752,
+										"height": 3168
+									},
+									"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9",
+									"width": 4752,
+									"height": 3168,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"credits": null,
+									"alt": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							]
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

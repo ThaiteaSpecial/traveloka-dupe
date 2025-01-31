@@ -1,0 +1,164 @@
+{
+  "id": "sort_by",
+  "type": "SharedSlice",
+  "name": "ListHotel",
+  "description": "SortBy",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "hotel_list": {
+          "type": "Group",
+          "config": {
+            "label": "hotel_list",
+            "repeat": true,
+            "fields": {
+              "id_hotel": {
+                "type": "Number",
+                "config": {
+                  "label": "id_hotel",
+                  "placeholder": ""
+                }
+              },
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "name",
+                  "placeholder": ""
+                }
+              },
+              "travel_rating": {
+                "type": "Text",
+                "config": {
+                  "label": "travel_rating",
+                  "placeholder": ""
+                }
+              },
+              "rating": {
+                "type": "Number",
+                "config": {
+                  "label": "rating",
+                  "placeholder": ""
+                }
+              },
+              "tag": {
+                "type": "Text",
+                "config": {
+                  "label": "tag",
+                  "placeholder": ""
+                }
+              },
+              "discount": {
+                "type": "Boolean",
+                "config": {
+                  "label": "discount",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "price_ori": {
+                "type": "Number",
+                "config": {
+                  "label": "price_ori",
+                  "placeholder": ""
+                }
+              },
+              "price_discount": {
+                "type": "Number",
+                "config": {
+                  "label": "price_discount",
+                  "placeholder": ""
+                }
+              },
+              "travel_review_origin": {
+                "type": "Text",
+                "config": {
+                  "label": "travel_review_origin",
+                  "placeholder": ""
+                }
+              },
+              "type": {
+                "type": "Select",
+                "config": {
+                  "label": "type",
+                  "placeholder": "",
+                  "options": [
+                    "hotel",
+                    "villa",
+                    "apartment"
+                  ]
+                }
+              },
+              "date_available": {
+                "type": "Date",
+                "config": {
+                  "label": "Date available",
+                  "placeholder": ""
+                }
+              },
+              "room_available": {
+                "type": "Number",
+                "config": {
+                  "label": "Room available",
+                  "placeholder": ""
+                }
+              },
+              "tax_fee": {
+                "type": "Number",
+                "config": {
+                  "label": "tax_fee",
+                  "placeholder": ""
+                }
+              },
+              "address": {
+                "type": "Text",
+                "config": {
+                  "label": "address",
+                  "placeholder": ""
+                }
+              },
+              "mean_review": {
+                "type": "Number",
+                "config": {
+                  "label": "mean_review",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "images": {
+          "type": "Group",
+          "config": {
+            "label": "images",
+            "repeat": true,
+            "fields": {
+              "id_images_list": {
+                "type": "Number",
+                "config": {
+                  "label": "id_images_list",
+                  "placeholder": ""
+                }
+              },
+              "images": {
+                "type": "Image",
+                "config": {
+                  "label": "images",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

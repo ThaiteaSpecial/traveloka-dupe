@@ -1,0 +1,747 @@
+{
+  "id": "detail_hotel",
+  "type": "SharedSlice",
+  "name": "DetailHotel",
+  "description": "DetailHotel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "images": {
+          "type": "Group",
+          "config": {
+            "label": "images",
+            "repeat": true,
+            "fields": {
+              "placeholder_images": {
+                "type": "Image",
+                "config": {
+                  "label": "placeholder_images",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "ratings": {
+          "type": "Text",
+          "config": {
+            "label": "ratings",
+            "placeholder": ""
+          }
+        },
+        "type": {
+          "type": "Select",
+          "config": {
+            "label": "type",
+            "placeholder": "",
+            "options": [
+              "hotel",
+              "apartment",
+              "villa"
+            ]
+          }
+        },
+        "price": {
+          "type": "Number",
+          "config": {
+            "label": "price",
+            "placeholder": ""
+          }
+        },
+        "review_ratings": {
+          "type": "Number",
+          "config": {
+            "label": "review_ratings",
+            "placeholder": ""
+          }
+        },
+        "tags_guest": {
+          "type": "Text",
+          "config": {
+            "label": "tags_guest",
+            "placeholder": ""
+          }
+        },
+        "reviews": {
+          "type": "Group",
+          "config": {
+            "label": "reviews",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "name",
+                  "placeholder": ""
+                }
+              },
+              "ratings": {
+                "type": "Number",
+                "config": {
+                  "label": "ratings",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "id_photos_review": {
+                "type": "Number",
+                "config": {
+                  "label": "id_photos_review",
+                  "placeholder": ""
+                }
+              },
+              "tags": {
+                "type": "Select",
+                "config": {
+                  "label": "tags",
+                  "placeholder": "",
+                  "options": [
+                    "strategic",
+                    "kids_friendly",
+                    "friendly_staff",
+                    "clean_room"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "facilities": {
+          "type": "Group",
+          "config": {
+            "label": "facilities",
+            "repeat": true,
+            "fields": {
+              "facilities_list": {
+                "type": "Text",
+                "config": {
+                  "label": "facilities_list",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "desc_hotel": {
+          "type": "StructuredText",
+          "config": {
+            "label": "desc_hotel",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "nearby_area": {
+          "type": "Group",
+          "config": {
+            "label": "nearby_area",
+            "repeat": true,
+            "fields": {
+              "address": {
+                "type": "GeoPoint",
+                "config": {
+                  "label": "address"
+                }
+              },
+              "range": {
+                "type": "Text",
+                "config": {
+                  "label": "range",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "rooms": {
+          "type": "Group",
+          "config": {
+            "label": "rooms",
+            "repeat": true,
+            "fields": {
+              "id_rooms": {
+                "type": "Number",
+                "config": {
+                  "label": "id_rooms",
+                  "placeholder": ""
+                }
+              },
+              "free_cancel": {
+                "type": "Boolean",
+                "config": {
+                  "label": "free_cancel",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "free_breakfast": {
+                "type": "Boolean",
+                "config": {
+                  "label": "free_breakfast",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "large_bed": {
+                "type": "Boolean",
+                "config": {
+                  "label": "large_bed",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "wide_rooms": {
+                "type": "Number",
+                "config": {
+                  "label": "wide_rooms",
+                  "placeholder": ""
+                }
+              },
+              "is_smoking": {
+                "type": "Boolean",
+                "config": {
+                  "label": "is_smoking",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "is_bathtube": {
+                "type": "Boolean",
+                "config": {
+                  "label": "is_bathtube",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "is_refrigerator": {
+                "type": "Boolean",
+                "config": {
+                  "label": "is_refrigerator",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "about_rooms": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "about rooms",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "amenities": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "amenities",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "room_facilities": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "room Facilities",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              },
+              "basic_facilities": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "basic Facilities",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+              }
+            }
+          }
+        },
+        "images_rooms": {
+          "type": "Group",
+          "config": {
+            "label": "images_rooms",
+            "repeat": true,
+            "fields": {
+              "images_rooms_placeholder": {
+                "type": "Image",
+                "config": {
+                  "label": "images_rooms_placeholder",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "id_images_placeholder": {
+                "type": "Number",
+                "config": {
+                  "label": "id_images_placeholder",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "rooms_options": {
+          "type": "Group",
+          "config": {
+            "label": "rooms_options",
+            "repeat": true,
+            "fields": {
+              "id_room_options": {
+                "type": "Number",
+                "config": {
+                  "label": "id_room_options",
+                  "placeholder": ""
+                }
+              },
+              "title_room": {
+                "type": "Text",
+                "config": {
+                  "label": "title_room",
+                  "placeholder": ""
+                }
+              },
+              "sub_title_room": {
+                "type": "Text",
+                "config": {
+                  "label": "sub_title_room",
+                  "placeholder": ""
+                }
+              },
+              "bed_count": {
+                "type": "Number",
+                "config": {
+                  "label": "bed_count",
+                  "placeholder": ""
+                }
+              },
+              "bed_type": {
+                "type": "Select",
+                "config": {
+                  "label": "bed_type",
+                  "placeholder": "",
+                  "options": [
+                    "king bed",
+                    "twin bed"
+                  ]
+                }
+              },
+              "is_refund": {
+                "type": "Boolean",
+                "config": {
+                  "label": "is_refund",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "guest_count": {
+                "type": "Number",
+                "config": {
+                  "label": "guest_count",
+                  "placeholder": ""
+                }
+              },
+              "tax_percentage": {
+                "type": "Number",
+                "config": {
+                  "label": "tax_percentage",
+                  "placeholder": ""
+                }
+              },
+              "best_price": {
+                "type": "Boolean",
+                "config": {
+                  "label": "best_price",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              },
+              "price": {
+                "type": "Number",
+                "config": {
+                  "label": "price",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "other_recomendation": {
+          "type": "Group",
+          "config": {
+            "label": "other_recomendation",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "name",
+                  "placeholder": ""
+                }
+              },
+              "rating": {
+                "type": "Number",
+                "config": {
+                  "label": "rating",
+                  "placeholder": ""
+                }
+              },
+              "rating_point": {
+                "type": "Number",
+                "config": {
+                  "label": "rating_point",
+                  "placeholder": "8.8"
+                }
+              },
+              "rating_k": {
+                "type": "Number",
+                "config": {
+                  "label": "rating_k",
+                  "placeholder": "8,9K => 8900"
+                }
+              },
+              "price": {
+                "type": "Number",
+                "config": {
+                  "label": "price",
+                  "placeholder": ""
+                }
+              },
+              "fee_price": {
+                "type": "Number",
+                "config": {
+                  "label": "fee_price",
+                  "placeholder": ""
+                }
+              },
+              "location": {
+                "type": "GeoPoint",
+                "config": {
+                  "label": "location"
+                }
+              }
+            }
+          }
+        },
+        "policy_general": {
+          "type": "Group",
+          "config": {
+            "label": "policy_general",
+            "repeat": true,
+            "fields": {
+              "check_in_check_out": {
+                "type": "Text",
+                "config": {
+                  "label": "check_in_check_out",
+                  "placeholder": ""
+                }
+              },
+              "deposit": {
+                "type": "Text",
+                "config": {
+                  "label": "Deposit",
+                  "placeholder": ""
+                }
+              },
+              "early_check_in": {
+                "type": "Text",
+                "config": {
+                  "label": "Early Check in",
+                  "placeholder": ""
+                }
+              },
+              "late_check_out": {
+                "type": "Text",
+                "config": {
+                  "label": "Late Check out",
+                  "placeholder": ""
+                }
+              },
+              "extra_breakfast": {
+                "type": "Text",
+                "config": {
+                  "label": "Extra Breakfast",
+                  "placeholder": ""
+                }
+              },
+              "breakfast": {
+                "type": "Text",
+                "config": {
+                  "label": "Breakfast",
+                  "placeholder": ""
+                }
+              },
+              "pets": {
+                "type": "Text",
+                "config": {
+                  "label": "Pets",
+                  "placeholder": ""
+                }
+              },
+              "additional_policy": {
+                "type": "Text",
+                "config": {
+                  "label": "Additional Policy",
+                  "placeholder": ""
+                }
+              },
+              "airport_transfer": {
+                "type": "Text",
+                "config": {
+                  "label": "Airport Transfer",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "general_information": {
+          "type": "Group",
+          "config": {
+            "label": "general_information",
+            "repeat": false,
+            "fields": {
+              "popular_facilities": {
+                "type": "Text",
+                "config": {
+                  "label": "Popular Facilities",
+                  "placeholder": ""
+                }
+              },
+              "check_in_check_out_time": {
+                "type": "Text",
+                "config": {
+                  "label": "Check In Check Out Time",
+                  "placeholder": ""
+                }
+              },
+              "distance_to_downtown": {
+                "type": "Text",
+                "config": {
+                  "label": "Distance to Downtown",
+                  "placeholder": ""
+                }
+              },
+              "popular_in_the_area": {
+                "type": "Text",
+                "config": {
+                  "label": "Popular in the Area",
+                  "placeholder": ""
+                }
+              },
+              "breakfast_availability": {
+                "type": "Text",
+                "config": {
+                  "label": "Breakfast Availability",
+                  "placeholder": ""
+                }
+              },
+              "available_rooms": {
+                "type": "Text",
+                "config": {
+                  "label": "Available rooms",
+                  "placeholder": ""
+                }
+              },
+              "number_of_floors": {
+                "type": "Text",
+                "config": {
+                  "label": "Number of floors",
+                  "placeholder": ""
+                }
+              },
+              "another_facilities": {
+                "type": "Text",
+                "config": {
+                  "label": "Another facilities",
+                  "placeholder": ""
+                }
+              },
+              "nearby_point_of_interest": {
+                "type": "Text",
+                "config": {
+                  "label": "Nearby point of interest",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "faq": {
+          "type": "Group",
+          "config": {
+            "label": "faq",
+            "repeat": false,
+            "fields": {
+              "avail_facility": {
+                "type": "Text",
+                "config": {
+                  "label": "avail_facility",
+                  "placeholder": ""
+                }
+              },
+              "cost": {
+                "type": "Text",
+                "config": {
+                  "label": "cost",
+                  "placeholder": ""
+                }
+              },
+              "check_in_check_out": {
+                "type": "Text",
+                "config": {
+                  "label": "check_in_check_out",
+                  "placeholder": ""
+                }
+              },
+              "provide_breakfast": {
+                "type": "Text",
+                "config": {
+                  "label": "provide_breakfast",
+                  "placeholder": ""
+                }
+              },
+              "type_rooms": {
+                "type": "Text",
+                "config": {
+                  "label": "type_rooms",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "ratings_section": {
+          "type": "Group",
+          "config": {
+            "label": "ratings_section",
+            "repeat": false,
+            "fields": {
+              "fantastic": {
+                "type": "Number",
+                "config": {
+                  "label": "fantastic",
+                  "placeholder": ""
+                }
+              },
+              "very_good": {
+                "type": "Number",
+                "config": {
+                  "label": "very_good",
+                  "placeholder": ""
+                }
+              },
+              "satisfying": {
+                "type": "Number",
+                "config": {
+                  "label": "satisfying",
+                  "placeholder": ""
+                }
+              },
+              "average": {
+                "type": "Number",
+                "config": {
+                  "label": "average",
+                  "placeholder": ""
+                }
+              },
+              "poor": {
+                "type": "Number",
+                "config": {
+                  "label": "poor",
+                  "placeholder": ""
+                }
+              },
+              "clean": {
+                "type": "Number",
+                "config": {
+                  "label": "clean",
+                  "placeholder": ""
+                }
+              },
+              "comfort": {
+                "type": "Number",
+                "config": {
+                  "label": "comfort",
+                  "placeholder": ""
+                }
+              },
+              "meal": {
+                "type": "Number",
+                "config": {
+                  "label": "meal",
+                  "placeholder": ""
+                }
+              },
+              "location": {
+                "type": "Number",
+                "config": {
+                  "label": "location",
+                  "placeholder": ""
+                }
+              },
+              "service": {
+                "type": "Number",
+                "config": {
+                  "label": "service",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "image_ratings": {
+          "type": "Group",
+          "config": {
+            "label": "image_ratings",
+            "repeat": true,
+            "fields": {
+              "id_photos": {
+                "type": "Number",
+                "config": {
+                  "label": "id_photos",
+                  "placeholder": ""
+                }
+              },
+              "images_photos": {
+                "type": "Image",
+                "config": {
+                  "label": "images_photos",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
