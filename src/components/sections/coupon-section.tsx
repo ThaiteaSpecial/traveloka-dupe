@@ -3,7 +3,7 @@
 import { useState, useRef } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { CouponCard } from "./coupon-card"
+import { CouponCard } from "@/components/sections/coupon-card"
 
 const coupons = [
   {

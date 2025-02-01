@@ -1,15 +1,16 @@
 import { ReactNode } from "react"
-import Header from "../ui/header"
-import Footer from "../ui/footer"
+import Header from "../sections/header"
+import Footer from "../sections/footer"
 
 interface LayoutProps {
+    isTransparentHeader?: boolean
     children: ReactNode
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, isTransparentHeader = false }: LayoutProps) {
     return (
         <div className="min-h-screen flex flex-col">
-            <Header />
+            <Header isTransparent={isTransparentHeader} />
 
             <main className="flex-1">
                 {children}
