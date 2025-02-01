@@ -10,6 +10,10 @@ export default {
   theme: {
   	extend: {
   		colors: {
+  			'blue-custom': {
+  				DEFAULT: 'rgba(1, 148, 243, 1.00)',
+  				dark: '#0059b2'
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

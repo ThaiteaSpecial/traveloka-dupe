@@ -11,6 +11,7 @@ import { MapPin, CalendarIcon, Users, Search } from "lucide-react"
 import { format } from "date-fns"
 import type { SearchParams, Destination } from "@/lib/types"
 import { GuestSelector } from "./guest-selector"
+import { useRouter } from "next/navigation"
 
 const initialPopularDestinations: Destination[] = [
     {
@@ -55,6 +56,7 @@ interface SearchFormProps {
 }
 
 export function SearchForm({ onSearch }: SearchFormProps) {
+    const router = useRouter()
     const [activeTab, setActiveTab] = useState("hotels")
     const [location, setLocation] = useState("")
     const [dateRange, setDateRange] = useState<{
@@ -124,6 +126,16 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                 rooms,
                 guests: adults + children,
             })
+
+            // Redirect to search page
+            const searchParams = new URLSearchParams({
+                checkIn: dateRange.from.toISOString(),
+                checkOut: dateRange.to.toISOString(),
+                rooms: rooms.toString(),
+                guests: (adults + children).toString()
+            })
+
+            router.push(`/search/${encodeURIComponent(location)}?${searchParams.toString()}`)
         }
     }
 

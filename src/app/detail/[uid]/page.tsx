@@ -17,7 +17,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
     .catch(() => notFound());
 
   return (
-    <Layout>
+    <Layout isStatic={true}>
         <SliceZone slices={page.data.slices} components={components} />
     </Layout>
   )

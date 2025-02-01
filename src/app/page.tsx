@@ -40,7 +40,7 @@ function Home() {
     <Layout isTransparentHeader={true}>
       <main className="flex-1">
         <section className="relative">
-          <div className="absolute inset-0 bg-[url('/placeholder.svg')] bg-cover bg-center -z-10">
+          <div className="absolute inset-0 bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2025/01/05/1736039053734-c2b57da96ac28a1df692de44bc14660b.png?tr=q-75')] bg-cover bg-center -z-10">
             <div className="absolute inset-0 bg-black/40" />
           </div>
 
@@ -52,26 +52,34 @@ function Home() {
               <div className="bg-white rounded-lg p-6 shadow-lg">
                 <SearchForm onSearch={handleSearch} />
               </div>
+              <Partners />
             </div>
           </div>
         </section>
-        <Partners />
         <section className="container mx-auto px-4 py-8">
           <div className="aspect-[48/11] w-full">
             <BannerCarousel />
           </div>
         </section>
-        <section className="container mx-auto px-4 py-8">
-          <CouponSection />
-        </section>
+        <div className="bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2024/10/08/1728356224894-e58e586e8919ff7f3bb1aa3e612ee9a4.jpeg?_src=imagekit&tr=dpr-2,q-40')] bg-cover bg-center">
+          <section className="container mx-auto px-4">
+            <CouponSection />
+          </section>
+        </div>
         <EnhanceTrip />
-        <BestDealsCarousel /> {/* Replaced BestDeals with BestDealsCarousel */}
+        <BestDealsCarousel />
         <DestinationGrid />
         <TravelGuides />
         <TravelArticles />
-        <WhyBookWithUs />
-        <InterestsSection />
-        <NewsletterAndAppDownload />
+        <div className="bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2023/11/17/1700215562769-2f362de4d3cf5253829ed5a07c10c17b.png?tr=dpr-2,q-75')] bg-cover bg-center">
+          <WhyBookWithUs />
+        </div>
+        <div className="bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2023/04/21/1682061066590-85ee56e96e55a4f5afe6a04afe8c55da.png?tr=dpr-2,q-75')] bg-cover bg-center">
+          <InterestsSection />
+        </div>
+        <div>
+          <NewsletterAndAppDownload />
+        </div>
       </main>
     </Layout>
   )

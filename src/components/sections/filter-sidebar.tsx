@@ -48,9 +48,11 @@ export function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
 
     return (
         <div className="space-y-4">
-            <Button variant="outline" className="w-full justify-start gap-2">
-                <Building2 className="h-4 w-4" />
-                Explore on Map
+            <Button 
+                variant="outline" 
+                className="flex flex-col items-center justify-center w-full h-[125px] gap-2 bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2024/09/05/1725509884357-7c1a5596fb0e685b4d41bee6ba3b3edd.svg?tr=q-75')] bg-no-repeat bg-cover"
+            >
+                <span className="p-2 rounded-full text-white font-bold text-lg bg-[linear-gradient(136.94deg,#024590_0%,#0071CE_46.1%,#0A9AF2_96.84%)]">Explore on Map</span>
             </Button>
 
             <RecentFilter />

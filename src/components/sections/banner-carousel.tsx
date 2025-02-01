@@ -7,19 +7,7 @@ const banners = [
   {
     id: 1,
     title: "Blessing Good Deals",
-    image: "/placeholder.svg?height=440&width=1920",
-    link: "#",
-  },
-  {
-    id: 2,
-    title: "Special Promo",
-    image: "/placeholder.svg?height=440&width=1920",
-    link: "#",
-  },
-  {
-    id: 3,
-    title: "Holiday Deals",
-    image: "/placeholder.svg?height=440&width=1920",
+    image: "https://ik.imagekit.io/tvlk/image/imageResource/2025/01/13/1736734154443-1104df2fe1af94d4fb2c2553a9be5c0c.png?tr=dpr-2,q-75,w-1280",
     link: "#",
   },
 ]

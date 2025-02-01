@@ -89,7 +89,7 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div style={{ marginTop: "8rem" }} className="min-h-screen bg-gray-50">
+      <div style={{ marginTop: "6rem" }} className="min-h-screen bg-gray-50">
         <div className={`transition-all duration-300 transform
           ${isScrolled
             ? 'fixed top-0 left-0 right-0 z-50 translate-y-0'
@@ -100,24 +100,24 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
             <div className="flex items-center gap-4 py-4">
               <div className="flex-1 flex items-center gap-4">
                 <div className="flex-1">
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button size="lg" variant="outline" className="w-full justify-start">
                     <MapPin className="mr-2 h-4 w-4" />
                     The Trans Luxury Hotel
                   </Button>
                 </div>
                 <div className="flex-1">
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button size="lg" variant="outline" className="w-full justify-start">
                     <Calendar className="mr-2 h-4 w-4" />
                     01 Feb - 02 Feb, 1 night(s)
                   </Button>
                 </div>
                 <div className="flex-1">
-                  <Button variant="outline" className="w-full justify-start">
+                  <Button size="lg" variant="outline" className="w-full justify-start">
                     <Users className="mr-2 h-4 w-4" />1 Adult(s), 0 Child, 1 Room
                   </Button>
                 </div>
               </div>
-              <Button className="bg-blue-600 hover:bg-blue-700">
+              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
                 <Search className="mr-2 h-4 w-4" />
                 Search Hotels
               </Button>
@@ -132,10 +132,10 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
           transition: 'all 300ms',
           transform: isScrolled ? 'translateY(0)' : 'translateY(0)',
           position: isScrolled ? 'fixed' : 'sticky',
-          top: isScrolled ? '67px' : '73px',
+          top: isScrolled ? '65px' : '60px',
           left: isScrolled ? 0 : undefined,
           right: isScrolled ? 0 : undefined,
-          zIndex: 40
+          zIndex: 50
         }}>
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between">
@@ -198,34 +198,37 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
             <div className="flex-1">
               <div id="overview" ref={overviewRef}>
                 <HotelGallery />
-                <HotelHeader />
-                <HotelInfo />
-                <AppDownloadBanner />
+                <div className="bg-white border-t border-l border-r border-gray-200 rounded-t-lg p-4">
+                  <HotelHeader />
+                  <HotelInfo />
+                </div>
               </div>
-              <div id="rooms" ref={roomsRef}>
+              <div id="rooms" className="bg-white border-l border-r border-gray-200 p-4" ref={roomsRef}>
                 <RoomSection />
               </div>
-              <div id="location" ref={locationRef}>
+              <div id="location" className="bg-white border-l border-r border-gray-200 p-4" ref={locationRef}>
                 <HotelLocation />
               </div>
-              <div id="facilities" ref={facilitiesRef}>
+              <div id="facilities" className="bg-white border-l border-r border-gray-200 p-4" ref={facilitiesRef}>
                 <HotelFacilities />
-                <CleanStay />
               </div>
-              <div id="policy" ref={policyRef}>
+              <div id="policy" className="bg-white border-l border-r border-gray-200 p-4" ref={policyRef}>
                 <HotelPolicy />
               </div>
-              <div id="reviews" ref={reviewsRef}>
+              <div id="reviews" className="bg-white border-l border-r border-gray-200 p-4" ref={reviewsRef}>
                 <HotelReviews />
+              </div>
+              <div className="bg-white border-l border-r border-b rounded-b-lg border-gray-200 p-4">
+                {/* <SimilarHotels /> */}
+                <HotelCTA />
+                <PopularHotels />
               </div>
             </div>
 
           </div>
         </main>
 
-        <SimilarHotels />
-        <HotelCTA />
-        <PopularHotels />
+
       </div>
     </section>
   )
