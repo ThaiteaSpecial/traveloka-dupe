@@ -45,7 +45,7 @@ const SortBy: FC<SortByProps> = ({ slice }) => {
   };
 
   const handleSearch = (params: SearchParams) => {
-    const filtered = originalHotels.filter((hotel) => {
+    const filtered = originalHotels.filter((hotel: any) => {
       if (params.location && !hotel?.location_name?.toLowerCase().includes(params.location.toLowerCase())) {
         return false;
       }
@@ -60,7 +60,7 @@ const SortBy: FC<SortByProps> = ({ slice }) => {
       }
       return true;
     });
-    setFilteredHotels(filtered);
+    setFilteredHotels(filtered as any);
   };
 
   const handleFilterChange = (filters: any) => {
@@ -79,7 +79,7 @@ const SortBy: FC<SortByProps> = ({ slice }) => {
       }
       return true;
     });
-    setFilteredHotels(filtered);
+    setFilteredHotels(filtered as any);
   };
 
   const handleSortChange = (value: string) => {
@@ -87,31 +87,31 @@ const SortBy: FC<SortByProps> = ({ slice }) => {
     
     switch (value) {
       case 'rating':
-        sortedHotels.sort((a, b) => b.rating - a.rating);
+        sortedHotels.sort((a, b) => (b.rating || 0) - (a.rating || 0));
         break;
       case 'price-asc':
-        sortedHotels.sort((a, b) => a.price_ori - b.price_ori);
+        sortedHotels.sort((a, b) => (a.price_ori || 0) - (b.price_ori || 0));
         break;
       case 'price-desc':
-        sortedHotels.sort((a, b) => b.price_ori - a.price_ori);
+        sortedHotels.sort((a, b) => (b.price_ori || 0) - (a.price_ori || 0));
         break;
       case 'popularity':
-        sortedHotels.sort((a, b) => +b.travel_review_origin - +a.travel_review_origin);
+        sortedHotels.sort((a, b) => +(b.travel_review_origin || 0) - +(a.travel_review_origin || 0));
         break;
       default:
         break;
     }
 
-    setFilteredHotels(sortedHotels);
+    setFilteredHotels(sortedHotels as any);
   };
 
   useEffect(() => {
-    const filtered = originalHotels.filter((hotel) => {
+    const filtered = originalHotels.filter((hotel: any) => {
       const meetsPrice = hotel.price_ori >= priceRange[0] && hotel.price_ori <= priceRange[1];
       const meetsStarRating = starRatings.length === 0 || starRatings.includes(hotel.rating);
       return meetsPrice && meetsStarRating;
     });
-    setFilteredHotels(filtered);
+    setFilteredHotels(filtered as any);
   }, [priceRange, starRatings, originalHotels]);
 
   console.log(originalHotels)

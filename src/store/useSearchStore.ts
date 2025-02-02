@@ -23,99 +23,33 @@ interface SearchState {
   search: (params: SearchParams) => void
 }
 
+const initialState = {
+  location: '',
+  dateRange: { from: undefined, to: undefined },
+  adults: 1,
+  children: 0,
+  rooms: 1,
+  lastSearch: null,
+  popularDestinations: []
+}
+
 export const useSearchStore = create<SearchState>()(
   persist(
     (set) => ({
-      location: '',
-      dateRange: {
-        from: undefined,
-        to: undefined,
-      },
-      adults: 1,
-      children: 0,
-      rooms: 1,
-      lastSearch: null,
-      popularDestinations: [
-        {
-          name: "Bandung",
-          location: "bandung",
-          region: "West Java",
-          country: "Indonesia",
-          type: "City",
-          hotels: 3951,
-        },
-        {
-          name: "Yogyakarta",
-          location: "yogyakarta",
-          region: "Special Region of Yogyakarta",
-          country: "Indonesia",
-          type: "City",
-          hotels: 2614,
-        },
-        {
-          name: "Jakarta",
-          location: "jakarta",
-          region: "",
-          country: "Indonesia",
-          type: "Region",
-          hotels: 6865,
-        },
-        {
-          name: "Bali",
-          location: "bali",
-          region: "",
-          country: "Indonesia",
-          type: "Region",
-          hotels: 12040,
-        },
-        {
-          name: "Singapore",
-          location: "singapore",
-          region: "",
-          country: "Singapore",
-          type: "Region",
-          hotels: 749,
-        },
-      ],
-      
-      setLocation: (location) => set({ location }),
-      setDateRange: (range) => set({ dateRange: range }),
-      setGuests: (adults: number, children: number, rooms: number) => set((prev) => ({ 
-        adults: Math.max(1, adults), 
-        children: Math.max(0, children),
-        rooms: Math.max(1, rooms)
-      })),
-      setLastSearch: (destination) => set({ lastSearch: destination }),
-      search: (params) => set((prev) => ({
-        ...prev,
-        location: params.location,
-        dateRange: {
-          from: params.checkIn,
-          to: params.checkOut,
-        },
-        adults: Math.floor(params.guests / 2),
-        children: params.guests % 2,
-        rooms: params.rooms,
-      })),
+      ...initialState,
+      setLocation: (location: string) => set({ location }),
+      setDateRange: (range: DateRange) => set({ dateRange: range }),
+      setGuests: (adults: number, children: number, rooms: number) => 
+        set({ adults, children, rooms }),
+      setLastSearch: (destination: Destination) => 
+        set({ lastSearch: destination }),
+      search: (params: SearchParams) => {
+        // Implement search logic here
+        console.log('Searching with params:', params)
+      }
     }),
     {
-      name: 'search-storage',
-      version: 1,
-      partialize: (state) => ({
-        ...state,
-        dateRange: state.dateRange ? {
-          from: state.dateRange.from?.toISOString(),
-          to: state.dateRange.to?.toISOString(),
-        } : undefined,
-      }),
-      onRehydrateStorage: () => (state) => {
-        if (state?.dateRange) {
-          state.dateRange = {
-            from: state.dateRange.from ? new Date(state.dateRange.from) : undefined,
-            to: state.dateRange.to ? new Date(state.dateRange.to) : undefined,
-          }
-        }
-      }
+      name: 'search-storage'
     }
   )
 ) 

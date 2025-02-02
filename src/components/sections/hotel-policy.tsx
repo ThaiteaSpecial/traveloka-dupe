@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Badge, Building2, Clock, FileText, Wallet, Info, Coffee } from "lucide-react"
+import { Building2, Clock, FileText, Wallet, Info, Coffee } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 
 function HotelPolicy({ data }: { data: any }) {
     return (
@@ -98,7 +99,7 @@ function HotelPolicy({ data }: { data: any }) {
                             <AccordionContent className="px-6 py-4 text-gray-600">
                                 <div className="flex flex-wrap gap-2">
                                     {["AC", "Restaurant", "Swimming Pool", "24-Hour Front Desk", "Parking", "Elevator", "WiFi"].map((facility) => (
-                                        <Badge key={facility} variant="secondary" className="bg-blue-50">{facility}</Badge>
+                                        <Badge key={facility} className="bg-blue-50">{facility}</Badge>
                                     ))}
                                 </div>
                                 <p className="mt-3">And many more amenities to ensure a comfortable stay.</p>

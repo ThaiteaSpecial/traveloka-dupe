@@ -5,11 +5,17 @@ import { Button } from "@/components/ui/button"
 import PriceRange from "@/components/filter-sections/price-range"
 import StarRating from "@/components/filter-sections/star-rating"
 
-interface FilterSidebarProps {
-    onFilterChange: (filters: any) => void
+interface FilterOptions {
+    priceRange?: number[];
+    starRatings?: number[];
 }
 
-export function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
+interface FilterSidebarProps {
+    onFilterChange: (filters: FilterOptions) => void
+    currentPriceRange: number[]
+}
+
+export function FilterSidebar({ onFilterChange, currentPriceRange }: FilterSidebarProps) {
     const [isSticky, setIsSticky] = useState(false)
     const popularFilterRef = useRef<HTMLDivElement>(null)
     const stickyTriggerRef = useRef<HTMLDivElement>(null)

@@ -15,21 +15,31 @@ interface AuthState {
   logout: () => void
 }
 
+const generateUserId = (): string => {
+  return Math.random().toString(36).slice(2)
+}
+
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+}
+
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
-      user: null,
-      isAuthenticated: false,
-      setUser: (user) => set({ user, isAuthenticated: !!user }),
-      login: (email, name) => set({ 
-        user: { 
-          id: Math.random().toString(36).slice(2), 
-          email, 
-          name 
-        }, 
-        isAuthenticated: true 
-      }),
-      logout: () => set({ user: null, isAuthenticated: false })
+      ...initialState,
+      setUser: (user: User | null) => 
+        set({ user, isAuthenticated: !!user }),
+      login: (email: string, name: string) => 
+        set({ 
+          user: { 
+            id: generateUserId(), 
+            email, 
+            name 
+          }, 
+          isAuthenticated: true 
+        }),
+      logout: () => set(initialState)
     }),
     {
       name: 'auth-storage'

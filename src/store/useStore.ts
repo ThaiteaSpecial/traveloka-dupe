@@ -121,8 +121,22 @@ export const useStore = create<PaymentState>()(
 export const clearPaymentStorage = () => {
     useStore.setState({
         currentStep: 1,
-        formData: null,
-        paymentDetails: null,
+        formData: {
+            contactDetails: {
+                fullName: '',
+                phone: '',
+                email: '',
+                bookingFor: 'self',
+                guestName: ''
+            },
+            specialRequests: {}
+        },
+        paymentDetails: {
+            amount: 0,
+            currency: 'IDR',
+            selectedPayment: '',
+            bookingId: ''
+        },
         timeLeft: 0
     })
 } 

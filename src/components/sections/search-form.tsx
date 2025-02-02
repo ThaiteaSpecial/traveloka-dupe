@@ -289,7 +289,7 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                                     mode="range"
                                     defaultMonth={dateRange?.from || new Date()}
                                     selected={dateRange}
-                                    onSelect={(range) => setDateRange(range || { from: undefined, to: undefined })}
+                                    onSelect={(range: any) => setDateRange(range || { from: undefined, to: undefined })}
                                     numberOfMonths={2}
                                 />
                             </PopoverContent>

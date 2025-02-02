@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge"
 import { Building2, Train, Cross, Ticket, MapPin } from "lucide-react"
 import Image from "next/image"
 
+
 function HotelLocation({ data }: { data: any }) {
     return (
         <div className="mt-8">

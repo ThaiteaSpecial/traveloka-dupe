@@ -8,8 +8,8 @@ import type { Hotel, SearchParams } from "@/lib/types"
 import { useRouter } from "next/navigation"
 
 interface HotelResultsProps {
-  hotels: Hotel[]
-  images: []
+  hotels: any
+  images: any
   sortBy: string
   onSortChange: (value: string) => void
   viewType: "grid" | "list"
@@ -29,8 +29,8 @@ function HotelResults({
   const router = useRouter()
 
   const findImage = (id: number) => {
-    const image = images.find((image) => image?.id_images_list === id)
-    return image?.images?.url
+    const image = images.find((image: any) => image?.id_images_list === id)
+    return image?.images?.url ?? '/placeholder.svg'
   }
 
   const handleRedirect = (id: number) => {
@@ -91,7 +91,7 @@ function HotelResults({
       </div>
 
       <div className={`grid gap-6 ${viewType === "grid" ? "sm:grid-cols-2 lg:grid-cols-3" : "grid-cols-1"}`}>
-        {hotels?.map((hotel, index) => (
+        {hotels?.map((hotel: any, index: any) => (
           <Card key={hotel?.id_hotel ?? index} className={viewType === "list" ? "flex flex-col sm:flex-row" : ""}>
             <div className={viewType === "list" ? "sm:w-1/3" : ""}>
               <Image

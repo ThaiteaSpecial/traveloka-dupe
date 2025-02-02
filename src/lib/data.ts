@@ -1,6 +1,4 @@
-import type { Hotel } from "./types"
-
-export const hotels: Hotel[] = [
+export const hotels= [
   {
     id: "1",
     name: "Grand Luxury Hotel",

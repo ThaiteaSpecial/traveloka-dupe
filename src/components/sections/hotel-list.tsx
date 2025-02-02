@@ -10,7 +10,7 @@ interface HotelListProps {
 export function HotelList({ hotels }: HotelListProps) {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {hotels.map((hotel) => (
+      {hotels.map((hotel: any) => (
         <Card key={hotel.id}>
           <Image
             src={hotel.image || "/placeholder.svg"}

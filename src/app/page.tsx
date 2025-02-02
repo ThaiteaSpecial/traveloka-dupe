@@ -21,10 +21,10 @@ import type { Hotel, SearchParams } from "@/lib/types"
 import Layout from "@/components/templates/layout"
 
 function Home() {
-  const [filteredHotels, setFilteredHotels] = useState<Hotel[]>(hotels)
+  const [filteredHotels, setFilteredHotels] = useState<any[]>(hotels)
 
   const handleSearch = (params: SearchParams) => {
-    const filtered = hotels.filter((hotel) => {
+    const filtered = hotels.filter((hotel: any) => {
       if (params.location && hotel.location !== params.location) {
         return false
       }

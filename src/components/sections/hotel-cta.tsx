@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
-function HotelCtA() {
+function HotelCtA({ data }: { data: any }) {
   return (
     <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-blue-900 to-blue-600 text-white">
       <div className="container mx-auto px-10 py-8 flex items-center justify-between">
