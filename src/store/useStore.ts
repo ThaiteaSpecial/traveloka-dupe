@@ -32,6 +32,7 @@ interface PaymentState {
   timeLeft: number
   setTimeLeft: (time: number) => void
   resetTimer: () => void
+  initializeTimer: (seconds: number) => void
 }
 
 export const useStore = create<PaymentState>()(
@@ -47,7 +48,11 @@ export const useStore = create<PaymentState>()(
         bookingId: ''
       },
       setPaymentDetails: (details) => set((state) => ({
-        paymentDetails: { ...state.paymentDetails, ...details }
+        paymentDetails: { 
+          ...state.paymentDetails, 
+          ...details,
+          expiryTime: details.expiryTime || state.paymentDetails.expiryTime 
+        }
       })),
       
       formData: {
@@ -72,9 +77,25 @@ export const useStore = create<PaymentState>()(
       })),
       
       // Timer implementation
-      timeLeft: 2400, // 40 minutes in seconds
-      setTimeLeft: (time) => set({ timeLeft: Math.max(0, time) }), // Ensure time never goes below 0
-      resetTimer: () => set({ timeLeft: 2400 })
+      timeLeft: 0,
+      setTimeLeft: (time) => set({ timeLeft: Math.max(0, time) }), // Prevent negative values
+      resetTimer: () => set((state) => {
+        const newExpiryTime = Date.now() + (900 * 1000)
+        return {
+          timeLeft: 900,
+          paymentDetails: {
+            ...state.paymentDetails,
+            expiryTime: newExpiryTime
+          }
+        }
+      }),
+      initializeTimer: (seconds) => set((state) => ({
+        timeLeft: Math.max(0, seconds),
+        paymentDetails: {
+          ...state.paymentDetails,
+          expiryTime: Date.now() + (seconds * 1000)
+        }
+      }))
     }),
     {
       name: 'payment-storage',
@@ -98,5 +119,10 @@ export const useStore = create<PaymentState>()(
 
 // Add this function to the store
 export const clearPaymentStorage = () => {
-    localStorage.removeItem('payment-storage')
+    useStore.setState({
+        currentStep: 1,
+        formData: null,
+        paymentDetails: null,
+        timeLeft: 0
+    })
 } 

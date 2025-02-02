@@ -8,9 +8,29 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Info, Users, Bed, Bath, Wind, Cigarette } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { useRoomStore } from "@/store/useRoomStore"
+import { useRouter } from "next/navigation"
 
 function RoomSection({ data }: { data: any }) {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([])
+    const setSelectedRoom = useRoomStore((state) => state.setSelectedRoom)
+    const router = useRouter()
+
+    const handleChooseRoom = (room: any) => {
+        setSelectedRoom({
+            id: room.id,
+            title_room: room.title_room,
+            sub_title_room: room.sub_title_room,
+            bed_count: room.bed_count,
+            bed_type: room.bed_type,
+            is_refund: room.is_refund,
+            guest_count: room.guest_count,
+            price: room.price,
+            hotel_name: data.name_hotel,
+            hotel_id: data.id_hotel
+        })
+        router.push('/form-payment/' + room.id)
+    }
 
     return (
         <div className="mt-8">
@@ -136,7 +156,7 @@ function RoomSection({ data }: { data: any }) {
                             {
                                 data?.rooms_options.map((room: any, index: number) => (
                                     <>
-                                        <div className="p-6 relative">
+                                        <div className="p-6 relative" key={`room-${index}`}>
                                             <div className="grid grid-cols-[2fr,1fr,auto] gap-8">
                                                 <div>
                                                     <div className="text-sm font-medium mb-2 font-semibold">{room.title_room}</div>
@@ -165,7 +185,12 @@ function RoomSection({ data }: { data: any }) {
                                                     <div className="text-xs text-muted-foreground line-through">Rp {room.price.toLocaleString('id-ID')}</div>
                                                     <div className="text-xl font-bold text-orange-500">Rp {(room.price * 0.9).toLocaleString('id-ID')}</div>
                                                     <div className="text-xs text-muted-foreground">Include taxes & fees</div>
-                                                    <Button className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2">Choose</Button>
+                                                    <Button 
+                                                        className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2"
+                                                        onClick={() => handleChooseRoom(room)}
+                                                    >
+                                                        Choose
+                                                    </Button>
                                                 </div>
                                             </div>
                                         </div>

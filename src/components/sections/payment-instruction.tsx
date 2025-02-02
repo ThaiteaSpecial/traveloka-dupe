@@ -131,7 +131,7 @@ export function PaymentInstructions() {
                 <p className="text-gray-600">
                     Once your payment is confirmed, we will send your e-ticket and receipt via email.
                 </p>
-                <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">Yes, I Have Paid</Button>
+                <Button size="lg" className="w-full bg-blue-custom hover:bg-blue-700 text-white font-semibold">Yes, I Have Paid</Button>
             </div>
         </div>
     )

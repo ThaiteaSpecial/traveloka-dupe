@@ -18,7 +18,7 @@ const initialPopularDestinations: Destination[] = [
     {
         name: "Bandung",
         location: "bandung",
-        region: "West Java",
+        region: "West Java", 
         country: "Indonesia",
         type: "City",
         hotels: 3951,
@@ -66,6 +66,8 @@ export function SearchForm({ onSearch }: SearchFormProps) {
     const [activeTab, setActiveTab] = useState("hotels")
     const [isGuestSelectorOpen, setIsGuestSelectorOpen] = useState(false)
     const [isLocationOpen, setIsLocationOpen] = useState(false)
+    const [searchResults, setSearchResults] = useState<Destination[]>([])
+    const [searchInput, setSearchInput] = useState("")
 
     const {
         location,
@@ -90,17 +92,34 @@ export function SearchForm({ onSearch }: SearchFormProps) {
 
     const handleLocationSelect = (destination: Destination) => {
         setLocation(destination.location)
+        setSearchInput(destination.name)
         setIsLocationOpen(false)
+    }
+
+    const handleLocationSearch = (searchTerm: string) => {
+        setSearchInput(searchTerm)
+        if (searchTerm.length >= 3) {
+            const results = initialPopularDestinations.filter(destination => 
+                destination.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                destination.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                destination.country.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            setSearchResults(results)
+            setIsLocationOpen(true)
+        } else {
+            setSearchResults([])
+            setIsLocationOpen(false)
+        }
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (dateRange?.from && dateRange?.to) {
             const searchData: Destination = {
-                name: location,
+                name: searchInput,
                 location: location,
-                region: "Sample Region", 
-                country: "Indonesia",
+                region: "Sample Region",
+                country: "Indonesia", 
                 type: "City",
                 hotels: Math.floor(Math.random() * 5000) + 1000,
             }
@@ -192,8 +211,8 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                                     type="text"
                                     placeholder="City, destination, or hotel name"
                                     className="pl-10"
-                                    value={location}
-                                    onChange={(e) => setLocation(e.target.value)}
+                                    value={searchInput}
+                                    onChange={(e) => handleLocationSearch(e.target.value)}
                                 />
                             </div>
                         </PopoverTrigger>
@@ -206,20 +225,37 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                             </div>
                             <ScrollArea className="h-[400px]">
                                 <div className="p-4 space-y-4">
-                                    {lastSearch && (
+                                    {searchResults.length > 0 && (
+                                        <div>
+                                            <h3 className="font-semibold mb-2">Search Results</h3>
+                                            <div className="space-y-2">
+                                                {searchResults.map((destination, index) => (
+                                                    <DestinationItem key={`search-${index}`} destination={destination} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                    {searchInput.length >= 3 && searchResults.length === 0 && (
+                                        <div className="text-center text-muted-foreground py-4">
+                                            No results found
+                                        </div>
+                                    )}
+                                    {searchInput.length < 3 && lastSearch && (
                                         <div>
                                             <h3 className="font-semibold mb-2">Your Last Search Result</h3>
                                             <DestinationItem destination={lastSearch} />
                                         </div>
                                     )}
-                                    <div>
-                                        <h3 className="font-semibold mb-2">Popular Destination</h3>
-                                        <div className="space-y-2">
-                                            {initialPopularDestinations.map((destination, index) => (
-                                                <DestinationItem key={index} destination={destination} />
-                                            ))}
+                                    {searchInput.length < 3 && (
+                                        <div>
+                                            <h3 className="font-semibold mb-2">Popular Destination</h3>
+                                            <div className="space-y-2">
+                                                {initialPopularDestinations.map((destination, index) => (
+                                                    <DestinationItem key={`popular-${index}`} destination={destination} />
+                                                ))}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )}
                                 </div>
                             </ScrollArea>
                         </PopoverContent>

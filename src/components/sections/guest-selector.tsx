@@ -16,10 +16,13 @@ export function GuestSelector({ adults, children, rooms, onUpdate, onDone }: Gue
         const current = type === "adults" ? adults : type === "children" ? children : rooms
         const newValue = increment ? current + 1 : current - 1
 
-        // Apply constraints
-        if (type === "adults" && (newValue < 1 || newValue > 8)) return
-        if (type === "children" && (newValue < 0 || newValue > 8)) return
-        if (type === "rooms" && (newValue < 1 || newValue > 8)) return
+        if (type === "adults") {
+            if (newValue < 1 || newValue > 8) return
+        } else if (type === "children") {
+            if (newValue < 0 || newValue > 8) return
+        } else if (type === "rooms") {
+            if (newValue < 1 || newValue > 8) return
+        }
 
         onUpdate(type, newValue)
     }

@@ -14,15 +14,20 @@ import { useState, useEffect } from "react"
 import { useStore } from '@/store/useStore'
 import { useRouter } from 'next/navigation'
 import { useAuthStore } from '@/store/useAuthStore'
+import { useRoomStore } from '@/store/useRoomStore'
+import { useSearchStore } from '@/store/useSearchStore'
 
 export default function PaymentPage({ params }: { params: { uid: string } }) {
     const router = useRouter()
     const { setCurrentStep, setFormData } = useStore()
+    const selectedRoom = useRoomStore((state) => state.selectedRoom)
+    const { dateRange, adults, children, rooms } = useSearchStore()
+
     const [contactDetails, setContactDetails] = useState({
         fullName: '',
         phone: '',
         email: '',
-        bookingFor: 'self',
+        bookingFor: 'self' as 'self' | 'other',
         guestName: ''
     })
 
@@ -43,6 +48,12 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
         }
     }, [isAuthenticated, router])
 
+    useEffect(() => {
+        if (!selectedRoom) {
+            router.push('/')
+        }
+    }, [selectedRoom, router])
+
     const handleContactChange = (field: string, value: string) => {
         setContactDetails(prev => ({
             ...prev,
@@ -59,8 +70,6 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        
-        // Save form data to store
         setFormData({
             contactDetails: {
                 ...contactDetails
@@ -69,13 +78,40 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                 ...specialRequests
             }
         })
-        
-        // Move to next step
         setCurrentStep(2)
-        
-        // Navigate to payment detail page
         router.push(`/detail-payment/${params.uid}`)
     }
+
+    const calculateTotalPrice = () => {
+        if (!selectedRoom || !dateRange.from || !dateRange.to) {
+            return {
+                originalPrice: 0,
+                roomPrice: 0,
+                taxesAndFees: 0,
+                total: 0,
+                totalNights: 0
+            }
+        }
+
+        const totalNights = Math.ceil(
+            (dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24)
+        )
+
+        const originalPrice = selectedRoom.price * totalNights
+        const roomPrice = originalPrice * 0.9
+        const taxesAndFees = roomPrice * 0.11 
+        const total = roomPrice + taxesAndFees
+
+        return {
+            originalPrice,
+            roomPrice,
+            taxesAndFees,
+            total,
+            totalNights
+        }
+    }
+
+    const prices = calculateTotalPrice()
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -177,7 +213,7 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                                     <RadioGroup
                                         className="grid grid-cols-2 gap-4"
                                         value={contactDetails.bookingFor}
-                                        onValueChange={(value) => handleContactChange('bookingFor', value)}
+                                        onValueChange={(value) => handleContactChange('bookingFor', value as 'self' | 'other')}
                                     >
                                         <div className="grid grid-cols-[auto_1fr] gap-2 items-center">
                                             <RadioGroupItem value="self" id="self" />
@@ -281,16 +317,16 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                                 </CardHeader>
                                 <CardContent className="space-y-4">
                                     <div className="flex justify-between py-2">
-                                        <div>Room Price</div>
-                                        <div>Rp 962.838</div>
+                                        <div>Room Price ({prices.totalNights} night{prices.totalNights > 1 ? 's' : ''})</div>
+                                        <div>Rp {prices.roomPrice.toLocaleString('id-ID')}</div>
                                     </div>
                                     <div className="flex justify-between py-2">
-                                        <div>Taxes and Fees</div>
-                                        <div>Rp 212.787</div>
+                                        <div>Taxes and Fees (11%)</div>
+                                        <div>Rp {prices.taxesAndFees.toLocaleString('id-ID')}</div>
                                     </div>
                                     <div className="flex justify-between py-4 border-t font-semibold">
                                         <div>Total Price</div>
-                                        <div className="text-orange-500">Rp 1.175.625</div>
+                                        <div className="text-orange-500">Rp {prices.total.toLocaleString('id-ID')}</div>
                                     </div>
                                     <Button size="lg" type="submit" className="font-bold w-full bg-orange-500 hover:bg-orange-600">Continue to Payment</Button>
                                 </CardContent>
@@ -305,7 +341,7 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                                         <div>
                                             <div className="flex items-start justify-between">
                                                 <div>
-                                                    <h3 className="font-semibold">Art Deco Luxury Hotel & Residence</h3>
+                                                    <h3 className="font-semibold">{selectedRoom?.hotel_name}</h3>
                                                 </div>
                                                 <div className="text-right">
                                                     <div className="flex items-center gap-1 mt-1">
@@ -332,41 +368,57 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                                         <div className="grid grid-cols-2 gap-4">
                                             <div className="border rounded-lg p-4">
                                                 <div className="text-sm text-gray-600">Check-in</div>
-                                                <div className="font-bold">Mon, 3 Feb 2025</div>
-                                                <div className="text-sm text-gray-600">Before 15:00</div>
+                                                <div className="font-bold">
+                                                    {dateRange.from?.toLocaleDateString('en-US', {
+                                                        weekday: 'short',
+                                                        day: 'numeric',
+                                                        month: 'short',
+                                                        year: 'numeric'
+                                                    })}
+                                                </div>
+                                                <div className="text-sm text-gray-600">From 15:00</div>
                                             </div>
 
                                             <div className="border rounded-lg p-4">
                                                 <div className="text-sm text-gray-600">Check-out</div>
-                                                <div className="font-bold">Tue, 4 Feb 2025</div>
+                                                <div className="font-bold">
+                                                    {dateRange.to?.toLocaleDateString('en-US', {
+                                                        weekday: 'short',
+                                                        day: 'numeric',
+                                                        month: 'short',
+                                                        year: 'numeric'
+                                                    })}
+                                                </div>
                                                 <div className="text-sm text-gray-600">Before 12:00</div>
                                             </div>
                                         </div>
 
                                         <div className="space-y-2">
-                                            <div className="font-bold text-lg">(1x) Deluxe Twin - Breakfast</div>
+                                            <div className="font-bold text-lg">
+                                                (1x) {selectedRoom?.title_room}
+                                            </div>
                                             <div className="text-sm flex items-center gap-2">
                                                 <UserRound className="h-4 w-4" />
-                                                2 Guest
+                                                {adults + children} Guest(s)
                                             </div>
                                             <div className="text-sm flex items-center gap-2">
                                                 <Bed className="h-4 w-4" />
-                                                1 Twin Bed
-                                            </div>
-                                            <div className="text-sm flex items-center gap-2">
-                                                <Coffee className="h-4 w-4" />
-                                                Breakfast included for 1 pax
+                                                {selectedRoom?.bed_count} {selectedRoom?.bed_type}
                                             </div>
                                             <div className="mt-4 pt-4 border-t space-y-2">
                                                 <div className="flex justify-between items-center text-gray-600">
-                                                    <div>1 room(s), 1 night(s)</div>
-                                                    <div className="line-through">Rp 1.381.049</div>
+                                                    <div>{rooms} room(s), {prices.totalNights} night(s)</div>
+                                                    <div className="line-through">
+                                                        Rp {prices.originalPrice.toLocaleString('id-ID')}
+                                                    </div>
                                                 </div>
                                                 <div className="flex justify-between items-center space-y-1">
                                                     <div className="font-bold text-lg">Total Price</div>
                                                     <div className="text-right space-y-0.5">
-                                                        <div className="font-bold text-2xl text-orange-500">Rp 1.058.063</div>
-                                                        <div className="text-sm text-green-600">• Best Offer</div>
+                                                        <div className="font-bold text-2xl text-orange-500">
+                                                            Rp {prices.total.toLocaleString('id-ID')}
+                                                        </div>
+                                                        <div className="text-sm text-green-600">• Save {((prices.originalPrice - prices.total) / prices.originalPrice * 100).toFixed(0)}%</div>
                                                     </div>
                                                 </div>
                                             </div>
