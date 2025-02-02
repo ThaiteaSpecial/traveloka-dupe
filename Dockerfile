@@ -2,7 +2,7 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm i --legacy-peer-deps
 COPY . .
 RUN npm run build
 
@@ -13,6 +13,6 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/node_modules ./node_modules
-RUN npm ci --only=production
+RUN npm i --legacy-peer-deps --only=production
 EXPOSE 3000
 CMD ["npm", "start"]
