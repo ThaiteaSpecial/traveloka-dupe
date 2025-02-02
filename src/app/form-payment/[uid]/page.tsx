@@ -17,7 +17,7 @@ import { useAuthStore } from '@/store/useAuthStore'
 import { useRoomStore } from '@/store/useRoomStore'
 import { useSearchStore } from '@/store/useSearchStore'
 
-export default async function FormPaymentPage({ params, searchParams }: any) {
+export default function FormPaymentPage({ params, searchParams }: any) {
     const router = useRouter()
     const { setCurrentStep, setFormData } = useStore()
     const selectedRoom = useRoomStore((state) => state.selectedRoom)
