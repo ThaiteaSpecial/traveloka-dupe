@@ -21,15 +21,35 @@ import PopularHotels from "@/components/sections/popular-hotels"
 import { FC, useState, useEffect, useRef } from "react"
 import { Content } from "@prismicio/client"
 import { SliceComponentProps } from "@prismicio/react"
+import SearchBar from "@/components/sections/search-bar"
+import { useRouter } from "next/navigation"
+import { useSearchStore } from "@/store/useSearchStore"
+import type { SearchParams } from "@/lib/types"
 
 
 export type DetailHotelProps = SliceComponentProps<Content.DetailHotelSlice>
 
 const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
-  console.log("🚀 ~ slice:", slice)
+  const router = useRouter()
+  const { search } = useSearchStore()
   const [activeTab, setActiveTab] = useState("overview")
   const [activeSection, setActiveSection] = useState("overview")
   const [isScrolled, setIsScrolled] = useState(false)
+
+  const handleSearch = (params: SearchParams) => {
+    // Update store with search params
+    search(params)
+    
+    // Redirect to search page
+    const urlSearchParams = new URLSearchParams({
+      checkIn: params.checkIn.toISOString(),
+      checkOut: params.checkOut.toISOString(),
+      rooms: params.rooms.toString(),
+      guests: params.guests.toString()
+    })
+
+    router.push(`/search/${encodeURIComponent(params.location)}?${urlSearchParams.toString()}`)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,31 +119,13 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
           bg-white
           `}>
           <div className="container mx-auto px-4">
-            <div className="flex items-center gap-4 py-4">
-              <div className="flex-1 flex items-center gap-4">
-                <div className="flex-1">
-                  <Button size="lg" variant="outline" className="w-full justify-start">
-                    <MapPin className="mr-2 h-4 w-4" />
-                    {slice.primary.name_hotel}
-                  </Button>
-                </div>
-                <div className="flex-1">
-                  <Button size="lg" variant="outline" className="w-full justify-start">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    01 Feb - 02 Feb, 1 night(s)
-                  </Button>
-                </div>
-                <div className="flex-1">
-                  <Button size="lg" variant="outline" className="w-full justify-start">
-                    <Users className="mr-2 h-4 w-4" />1 Adult(s), 0 Child, 1 Room
-                  </Button>
-                </div>
-              </div>
-              <Button size="lg" className="bg-blue-custom hover:bg-blue-700 font-bold">
-                <Search className="mr-2 h-4 w-4 font-bold" />
-                Search Hotels
-              </Button>
-            </div>
+            <SearchBar initialParams={{
+              location: "",
+              checkIn: new Date(),
+              checkOut: new Date(Date.now() + 24 * 60 * 60 * 1000),
+              rooms: 1,
+              guests: 1
+            }} onSearch={handleSearch} />
           </div>
         </div>
 
@@ -161,7 +163,7 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
                   </button>
                 ))}
               </div>
-              <Button variant="ghost" className="text-blue-600">
+              <Button variant="ghost" className="text-blue-custom font-semibold">
                 Save accommodation
               </Button>
             </div>
@@ -173,22 +175,6 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
           <div className="flex items-center text-sm text-muted-foreground">
             <Link href="/" className="hover:text-blue-600">
               Hotel
-            </Link>
-            <ChevronRight className="h-4 w-4 mx-2" />
-            <Link href="/" className="hover:text-blue-600">
-              Indonesia (55,613 Hotels)
-            </Link>
-            <ChevronRight className="h-4 w-4 mx-2" />
-            <Link href="/" className="hover:text-blue-600">
-              West Java (10,244 Hotels)
-            </Link>
-            <ChevronRight className="h-4 w-4 mx-2" />
-            <Link href="/" className="hover:text-blue-600">
-              Bandung (3,950 Hotels)
-            </Link>
-            <ChevronRight className="h-4 w-4 mx-2" />
-            <Link href="/" className="hover:text-blue-600">
-              Buahbatu (167 Hotels)
             </Link>
             <ChevronRight className="h-4 w-4 mx-2" />
             <span>{slice.primary.name_hotel}</span>
@@ -206,7 +192,7 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
                 </div>
               </div>
               <div id="rooms" className="bg-white border-l border-r border-gray-200 p-4" ref={roomsRef}>
-                <RoomSection data={slice.primary}/>
+                <RoomSection data={slice.primary} />
               </div>
               <div id="location" className="bg-white border-l border-r border-gray-200 p-4" ref={locationRef}>
                 <HotelLocation data={slice.primary} />

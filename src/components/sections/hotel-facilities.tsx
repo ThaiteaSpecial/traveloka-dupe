@@ -44,23 +44,23 @@ const facilities = {
 const facilityImages = [
     {
         title: "Bar, Cafe and Lounge",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10005852-c68f9d0451fc5240e511dccf2575e0dc.jpeg?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-80,w-640",
     },
     {
         title: "Swimming Pool",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10005852-63646a1f8368d05749ad73fd871e68a5.jpeg?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-80,w-640",
     },
     {
         title: "Fitness Center",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10005852-76ab21dca043326d416141b911fd6abb.jpeg?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-80,w-640",
     },
     {
         title: "Functional Hall",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10005852-2e1aeee605a86aad91866b4f2f9d570f.jpeg?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-80,w-640",
     },
     {
         title: "Lobby",
-        image: "/placeholder.svg?height=200&width=300",
+        image: "https://ik.imagekit.io/tvlk/apr-asset/dgXfoyh24ryQLRcGq00cIdKHRmotrWLNlvG-TxlcLxGkiDwaUSggleJNPRgIHCX6/hotel/asset/10005852-a69312a1773bceb4761f41bf0b61bca1.jpeg?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-80,w-640",
     },
 ]
 
@@ -81,7 +81,7 @@ function HotelFacilities({ data }: { data: any }) {
                                 className="w-full aspect-[4/3] object-cover rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/40 rounded-lg flex items-end">
-                                <div className="p-3 text-white font-medium">{facility.title}</div>
+                                <div className="p-3 text-white font-semibold">{facility.title}</div>
                             </div>
                         </div>
                     ))}

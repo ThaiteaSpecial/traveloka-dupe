@@ -99,7 +99,11 @@ function HotelResults({
                 alt={hotel?.name}
                 width={400}
                 height={300}
-                className="w-full h-48 object-cover rounded-t-lg sm:rounded-l-lg sm:rounded-t-none"
+                className={`w-full h-48 object-cover ${
+                  viewType === "list" 
+                    ? "rounded-t-lg sm:rounded-l-xl sm:rounded-t-none sm:rounded-r-none" 
+                    : "rounded-t-xl"
+                }`}
               />
             </div>
             <CardContent className={`p-4 ${viewType === "list" ? "sm:w-2/3" : ""}`}>

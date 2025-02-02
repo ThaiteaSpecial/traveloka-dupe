@@ -12,10 +12,20 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuthStore()
 
   useEffect(() => {
-    if (!isAuthenticated && !publicPaths.includes(pathname)) {
+    const isSearchPath = pathname.startsWith('/search/')
+    const isDetailPath = pathname.startsWith('/detail/')
+    const isFormPaymentPath = pathname.startsWith('/form-payment/')
+    
+    const isPublicRoute = publicPaths.some(path => pathname === path || pathname.startsWith(path + '/')) || 
+                         isSearchPath || 
+                         isDetailPath ||
+                         isFormPaymentPath
+
+    if (!isPublicRoute && !isAuthenticated) {
       router.push('/')
+      return
     }
   }, [isAuthenticated, pathname, router])
 
   return <>{children}</>
-} 
+}

@@ -18,7 +18,7 @@ const initialPopularDestinations: Destination[] = [
     {
         name: "Bandung",
         location: "bandung",
-        region: "West Java", 
+        region: "West Java",
         country: "Indonesia",
         type: "City",
         hotels: 3951,
@@ -99,7 +99,7 @@ export function SearchForm({ onSearch }: SearchFormProps) {
     const handleLocationSearch = (searchTerm: string) => {
         setSearchInput(searchTerm)
         if (searchTerm.length >= 3) {
-            const results = initialPopularDestinations.filter(destination => 
+            const results = initialPopularDestinations.filter(destination =>
                 destination.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 destination.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 destination.country.toLowerCase().includes(searchTerm.toLowerCase())
@@ -115,11 +115,15 @@ export function SearchForm({ onSearch }: SearchFormProps) {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (dateRange?.from && dateRange?.to) {
-            const searchData: Destination = {
+            const selectedDestination = popularDestinations.find(dest => 
+                dest.name.toLowerCase() === searchInput.toLowerCase()
+            )
+
+            const searchData: Destination = selectedDestination || {
                 name: searchInput,
-                location: location,
+                location: searchInput.toLowerCase(),
                 region: "Sample Region",
-                country: "Indonesia", 
+                country: "Indonesia",
                 type: "City",
                 hotels: Math.floor(Math.random() * 5000) + 1000,
             }
@@ -127,10 +131,10 @@ export function SearchForm({ onSearch }: SearchFormProps) {
             setLastSearch(searchData)
 
             const searchParams = {
-                location,
+                location: searchData.location,
                 checkIn: dateRange.from,
                 checkOut: dateRange.to,
-                rooms,
+                rooms: rooms,
                 guests: adults + children,
             }
 
@@ -148,7 +152,7 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                 guests: (adults + children).toString()
             })
 
-            router.push(`/search/${encodeURIComponent(location)}?${urlSearchParams.toString()}`)
+            router.push(`/search/${encodeURIComponent(searchData.location)}?${urlSearchParams.toString()}`)
         }
     }
 
@@ -181,21 +185,21 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                 <Button
                     variant={activeTab === "hotels" ? "default" : "ghost"}
                     onClick={() => setActiveTab("hotels")}
-                    className="text-sm"
+                    className={`text-sm ${activeTab === "hotels" ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
                 >
                     Hotels
                 </Button>
                 <Button
                     variant={activeTab === "villa" ? "default" : "ghost"}
                     onClick={() => setActiveTab("villa")}
-                    className="text-sm"
+                    className={`text-sm ${activeTab === "villa" ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
                 >
                     Villa
                 </Button>
                 <Button
                     variant={activeTab === "apartment" ? "default" : "ghost"}
                     onClick={() => setActiveTab("apartment")}
-                    className="text-sm"
+                    className={`text-sm ${activeTab === "apartment" ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
                 >
                     Apartment
                 </Button>
@@ -266,8 +270,8 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                             <PopoverTrigger asChild>
                                 <Button variant="outline" className="w-full justify-start text-left font-normal">
                                     <CalendarIcon className="mr-2 h-4 w-4" />
-                                    {dateRange.from ? (
-                                        dateRange.to ? (
+                                    {dateRange?.from ? (
+                                        dateRange?.to ? (
                                             <>
                                                 {format(dateRange.from, "LLL dd, y")} - {format(dateRange.to, "LLL dd, y")}
                                             </>
@@ -283,20 +287,19 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                                 <Calendar
                                     initialFocus
                                     mode="range"
-                                    defaultMonth={dateRange.from}
+                                    defaultMonth={dateRange?.from || new Date()}
                                     selected={dateRange}
-                                    onSelect={setDateRange}
+                                    onSelect={(range) => setDateRange(range || { from: undefined, to: undefined })}
                                     numberOfMonths={2}
                                 />
                             </PopoverContent>
                         </Popover>
 
-                        <Popover>
+                        <Popover open={isGuestSelectorOpen} onOpenChange={setIsGuestSelectorOpen}>
                             <PopoverTrigger asChild>
                                 <Button
                                     variant="outline"
                                     className="w-full justify-start text-left font-normal"
-                                    onClick={() => setIsGuestSelectorOpen(true)}
                                 >
                                     <Users className="mr-2 h-4 w-4" />
                                     {`${adults} Adult${adults > 1 ? "s" : ""}, ${children} Child${children > 1 ? "ren" : ""
@@ -316,7 +319,7 @@ export function SearchForm({ onSearch }: SearchFormProps) {
                     </div>
                 </div>
 
-                <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button size="lg" disabled={!searchInput} type="submit" className="w-full bg-orange-500 font-semibold hover:bg-orange-600">
                     <Search className="h-4 w-4 mr-2" />
                     Search
                 </Button>

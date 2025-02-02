@@ -89,7 +89,7 @@ function SimilarHotels() {
                 <h3 className="font-semibold mb-1">{hotel.name}</h3>
                 <div className="flex items-center gap-1 mb-2">
                   <MapPin className="h-4 w-4 text-gray-500" />
-                  <span className="text-sm text-muted-foreground">{hotel.location}</span>
+                  <span className="text-sm text-muted-foreground">{hotel?.location}</span>
                 </div>
                 <div className="flex items-center gap-2 mb-3">
                   <div className="flex items-center">

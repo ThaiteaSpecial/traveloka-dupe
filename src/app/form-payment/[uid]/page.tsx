@@ -22,6 +22,7 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
     const { setCurrentStep, setFormData } = useStore()
     const selectedRoom = useRoomStore((state) => state.selectedRoom)
     const { dateRange, adults, children, rooms } = useSearchStore()
+    const { isAuthenticated, user } = useAuthStore()
 
     const [contactDetails, setContactDetails] = useState({
         fullName: '',
@@ -40,8 +41,6 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
         checkOutTime: false
     })
 
-    const { isAuthenticated } = useAuthStore()
-    
     useEffect(() => {
         if (!isAuthenticated) {
             router.push('/')
@@ -99,7 +98,7 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
 
         const originalPrice = selectedRoom.price * totalNights
         const roomPrice = originalPrice * 0.9
-        const taxesAndFees = roomPrice * 0.11 
+        const taxesAndFees = roomPrice * 0.11
         const total = roomPrice + taxesAndFees
 
         return {
@@ -130,25 +129,25 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                             <Card>
                                 <CardContent className="p-6">
                                     <div className="flex items-start gap-4">
-                                        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">F</div>
+                                        <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">{user?.name.charAt(0)}</div>
                                         <div>
                                             <h3 className="font-medium">
-                                                Hi, fathu.rikli! Enjoy these perks as a Traveloka Bronze Priority Member.
+                                                Hi, {user?.name}! Enjoy these perks as a Traveloka Bronze Priority Member.
                                             </h3>
-                                            <p className="text-sm text-gray-600">Login as fathu.rikli (Google)</p>
+                                            <p className="text-sm text-gray-600">Login as {user?.email} (Google)</p>
                                         </div>
                                     </div>
 
                                     <div className="grid sm:grid-cols-2 gap-4 mt-6">
                                         <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                                            <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                                            <div className="w-8 h-8 bg-gray-200 rounded-full bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2023/10/30/1698670448655-acf98eab458ff4de2da6a0f197fb576c.svg?tr=dpr-2,fo-auto,h-32,q-75,w-28')] bg-cover bg-center" />
                                             <div>
                                                 <div className="font-medium">24/7 Customer Service</div>
                                                 <div className="text-sm text-gray-600">Reach out to our agent anytime you need them</div>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
-                                            <div className="w-8 h-8 bg-gray-200 rounded-full" />
+                                            <div className="w-8 h-8 bg-gray-200 rounded-full bg-[url('https://ik.imagekit.io/tvlk/image/imageResource/2023/10/30/1698670465085-b303f0b1273c1a8fd071c5dd9b11fde5.svg?tr=dpr-2,fo-auto,h-32,q-75,w-28')] bg-cover bg-center" />
                                             <div>
                                                 <div className="font-medium">Cashback Points</div>
                                                 <div className="text-sm text-gray-600">Collect more points you can use later</div>
@@ -328,7 +327,22 @@ export default function PaymentPage({ params }: { params: { uid: string } }) {
                                         <div>Total Price</div>
                                         <div className="text-orange-500">Rp {prices.total.toLocaleString('id-ID')}</div>
                                     </div>
-                                    <Button size="lg" type="submit" className="font-bold w-full bg-orange-500 hover:bg-orange-600">Continue to Payment</Button>
+                                    <div>
+                                        <div className="flex items-center justify-center gap-2 mb-4">
+                                            <div className="w-4 h-4">
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#0064D2" strokeWidth="2" />
+                                                    <path d="M12 6V12" stroke="#0064D2" strokeWidth="2" strokeLinecap="round" />
+                                                    <circle cx="12" cy="16" r="1" fill="#0064D2" />
+                                                </svg>
+                                            </div>
+                                            <p className="text-xs text-gray-500">You won't be charged yet!</p>
+                                        </div>
+                                        <Button size="lg" type="submit" className="font-bold w-full font-semibold bg-orange-500 hover:bg-orange-600">Continue to Payment</Button>
+                                        <p className="text-xs text-gray-500 text-center mt-4">
+                                            By continuing to payment, you have agreed to Traveloka's <a href="#" className="text-blue-600">Terms & Conditions</a>, <a href="#" className="text-blue-600">Privacy Policy</a>, and <a href="#" className="text-blue-600">Accommodation Refund Procedure</a>
+                                        </p>
+                                    </div>
                                 </CardContent>
                             </Card>
                         </div>

@@ -21,12 +21,12 @@ export function HotelList({ hotels }: HotelListProps) {
           />
           <CardContent className="p-4">
             <h3 className="font-semibold text-lg">{hotel.name}</h3>
-            <p className="text-sm text-muted-foreground">{hotel.location}</p>
+            <p className="text-sm text-muted-foreground">{hotel?.location}</p>
             <div className="flex items-center mt-2">
               <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className="ml-1 text-sm">{hotel.rating}</span>
+              <span className="ml-1 text-sm">{hotel?.rating}</span>
             </div>
-            <p className="mt-2 font-semibold">IDR {hotel.price.toLocaleString("id-ID")} / night</p>
+            <p className="mt-2 font-semibold">IDR {hotel?.price.toLocaleString("id-ID")} / night</p>
           </CardContent>
         </Card>
       ))}

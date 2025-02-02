@@ -12,6 +12,13 @@ export interface SearchHistory {
     popularDestinations: Destination[]
 }
 
+export interface SearchParams {
+  location: string
+  checkIn: Date
+  checkOut: Date
+  rooms: number
+  guests: number
+}
 
 export interface Hotel {
   id_hotel: number;

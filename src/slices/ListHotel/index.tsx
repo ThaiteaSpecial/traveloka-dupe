@@ -46,7 +46,7 @@ const SortBy: FC<SortByProps> = ({ slice }) => {
 
   const handleSearch = (params: SearchParams) => {
     const filtered = originalHotels.filter((hotel) => {
-      if (params.location && !hotel.location.toLowerCase().includes(params.location.toLowerCase())) {
+      if (params.location && !hotel?.location_name?.toLowerCase().includes(params.location.toLowerCase())) {
         return false;
       }
       if (params.rooms && hotel.rooms < params.rooms) {

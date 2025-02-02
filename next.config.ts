@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
         hostname: 'images.prismic.io',
         port: '',
         pathname: '/traveloka-dupe/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

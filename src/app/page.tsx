@@ -52,7 +52,6 @@ function Home() {
               <div className="bg-white rounded-lg p-6 shadow-lg">
                 <SearchForm onSearch={handleSearch} />
               </div>
-              <Partners />
             </div>
           </div>
         </section>

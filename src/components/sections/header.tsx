@@ -6,6 +6,7 @@ import { Globe, ChevronDown, Menu } from "lucide-react"
 import { useEffect, useState } from "react"
 import LoginModal from "./modal-login"
 import { useAuthStore } from '@/store/useAuthStore'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
     isTransparent?: boolean
@@ -16,7 +17,13 @@ export function Header({ isTransparent = false, isStatic = false }: HeaderProps)
     const [isScrolled, setIsScrolled] = useState(false)
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const { isAuthenticated } = useAuthStore()
+    const { isAuthenticated, user, logout } = useAuthStore()
+    const router = useRouter()
+
+    const handleLogout = () => {
+        logout()
+        router.push('/')
+    }
 
     useEffect(() => {
         const handleScroll = () => {
@@ -123,23 +130,41 @@ export function Header({ isTransparent = false, isStatic = false }: HeaderProps)
                                             {item}
                                         </Link>
                                     ))}
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-4">
                                         {isAuthenticated ? (
-                                            <span className={`px-4 py-2 font-medium ${
-                                                isTransparentHeader 
-                                                    ? "text-white" 
-                                                    : "text-gray-600"
-                                            }`}>
-                                                Logged In ✓
-                                            </span>
+                                            <>
+                                                <div className="flex items-center gap-2">
+                                                    <div className="text-gray-600 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                                        {user?.name.charAt(0)}
+                                                    </div>
+                                                    <span className={`font-medium ${
+                                                        isTransparentHeader 
+                                                            ? "text-white" 
+                                                            : "text-gray-600"
+                                                    }`}>
+                                                        {user?.name}
+                                                    </span>
+                                                </div>
+                                                <button
+                                                    onClick={handleLogout}
+                                                    className={`text-sm font-medium hover:underline ${
+                                                        isTransparentHeader 
+                                                            ? "text-white" 
+                                                            : "text-red-600"
+                                                    }`}
+                                                >
+                                                    Logout
+                                                </button>
+                                            </>
                                         ) : (
                                             <Button
                                                 onClick={() => setIsLoginModalOpen(true)}
                                                 variant={isTransparentHeader ? "outline" : "ghost"}
                                                 size="lg"
                                                 className={isTransparentHeader
-                                                    ? "text-white text-gray-800 border-white hover:bg-white hover:text-gray-800"
-                                                    : "text-gray-600"}
+                                                    ? "text-white text-gray-800 border-white hover:bg-white hover:text-gray-800 font-semibold"
+                                                    : "text-gray-600 font-semibold"
+                                                }
                                             >
                                                 Log In
                                             </Button>
@@ -147,16 +172,24 @@ export function Header({ isTransparent = false, isStatic = false }: HeaderProps)
                                     </div>
                                 </div>
                                 <div className="flex lg:hidden items-center space-x-2">
-                                    <Button
-                                        onClick={() => setIsLoginModalOpen(true)}
-                                        variant={isTransparentHeader ? "outline" : "ghost"}
-                                        size="lg"
-                                        className={isTransparentHeader
-                                            ? "text-white text-gray-800 border-white hover:bg-white hover:text-gray-800"
-                                            : "text-gray-600"}
-                                    >
-                                        Log In
-                                    </Button>
+                                    {isAuthenticated ? (
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                                {user?.name.charAt(0)}
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <Button
+                                            onClick={() => setIsLoginModalOpen(true)}
+                                            variant={isTransparentHeader ? "outline" : "ghost"}
+                                            size="lg"
+                                            className={isTransparentHeader
+                                                ? "text-white text-gray-800 border-white hover:bg-white hover:text-gray-800"
+                                                : "text-gray-600"}
+                                        >
+                                            Log In
+                                        </Button>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -198,6 +231,18 @@ export function Header({ isTransparent = false, isStatic = false }: HeaderProps)
                     {isMobileMenuOpen && (
                         <div className="lg:hidden bg-white">
                             <div className="py-2 space-y-1">
+                                {isAuthenticated && (
+                                    <div className="px-4 py-2 border-b border-gray-200">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                                                {user?.name.charAt(0)}
+                                            </div>
+                                            <span className="font-medium text-gray-600">
+                                                {user?.name}
+                                            </span>
+                                        </div>
+                                    </div>
+                                )}
                                 {[
                                     ['Hotels', '/hotels'],
                                     ['Flights', '/flights'],

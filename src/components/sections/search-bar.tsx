@@ -66,7 +66,13 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
     search
   } = useSearchStore()
 
+  console.log(">>", adults)
+  console.log(">>", children)
+  console.log(">>", rooms)
+
+
   const [isLocationOpen, setIsLocationOpen] = useState(false)
+  const [isGuestSelectorOpen, setIsGuestSelectorOpen] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [lastSearch, setLastSearch] = useState<Destination | null>(null)
   const [filteredDestinations, setFilteredDestinations] = useState(popularDestinations)
@@ -215,7 +221,7 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
           </PopoverContent>
         </Popover>
 
-        <Popover>
+        <Popover open={isGuestSelectorOpen} onOpenChange={setIsGuestSelectorOpen}>
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-full justify-start font-normal">
               <Users className="mr-2 h-4 w-4" />
@@ -229,7 +235,7 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
               children={children}
               rooms={rooms}
               onUpdate={handleGuestUpdate}
-              onDone={() => { }}
+              onDone={() => setIsGuestSelectorOpen(false)}
             />
           </PopoverContent>
         </Popover>

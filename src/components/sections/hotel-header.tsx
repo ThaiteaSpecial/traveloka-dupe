@@ -3,6 +3,13 @@ import Link from "next/link"
 import { Button } from "../ui/button"
 
 function HotelHeader({ hotel }: { hotel: any }) {
+  const scrollToRooms = () => {
+    const roomsSection = document.getElementById('rooms-section')
+    if (roomsSection) {
+      roomsSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <div className="mb-8">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-0 mb-4">
@@ -24,7 +31,11 @@ function HotelHeader({ hotel }: { hotel: any }) {
             <div className="text-sm text-muted-foreground">Total price starts from</div>
             <div className="text-xl sm:text-2xl font-bold text-orange-500">Rp {new Intl.NumberFormat('id-ID').format(hotel.price)}</div>
           </div>
-          <Button size="lg" className="px-4 py-2 bg-[rgb(255,94,31)] text-white rounded-lg hover:bg-[rgb(230,85,28)] transition-colors font-bold">
+          <Button 
+            size="lg" 
+            className="px-4 py-2 bg-[rgb(255,94,31)] text-white rounded-lg hover:bg-[rgb(230,85,28)] transition-colors font-bold"
+            onClick={scrollToRooms}
+          >
             Book Now
           </Button>
         </div>

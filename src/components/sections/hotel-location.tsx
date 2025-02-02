@@ -11,10 +11,9 @@ function HotelLocation({ data }: { data: any }) {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div className="col-span-2">
                     <div className="relative h-[400px] rounded-lg overflow-hidden bg-gray-100">
-                        {/* Map placeholder - In a real app, you'd integrate with a mapping service */}
                         <div className="absolute inset-0 bg-gray-200">
                             <Image
-                                src="/placeholder.svg?height=400&width=800"
+                                src="https://placehold.co/800x400/e5e7eb/a3a3a3?text=Map+Placeholder"
                                 alt="Map"
                                 width={800}
                                 height={400}

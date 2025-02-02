@@ -26,23 +26,23 @@ const reviewTags = [
 
 const guestPhotos = [
     {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aHwhDtLFjYMqIjcdUrrml4IPBDxF2w.png",
+        src: "https://ik.imagekit.io/tvlk/ugc-review/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/ugc-photo-ap-southeast-1-581603780057-acd24e232f75f09e/ACCOMMODATION/13042042_ACCOMMODATION_1688829369534_d633b970398350f6?_src=imagekit&tr=dpr-2,h-145,q-40,w-145",
         alt: "Guest room photo",
     },
     {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aHwhDtLFjYMqIjcdUrrml4IPBDxF2w.png",
+        src: "https://ik.imagekit.io/tvlk/ugc-review/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/ugc-photo-ap-southeast-1-581603780057-acd24e232f75f09e/ACCOMMODATION/13042042_ACCOMMODATION_1688829369534_0cf599c39d7ccafc?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-40,w-640",
         alt: "Amenities photo",
     },
     {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aHwhDtLFjYMqIjcdUrrml4IPBDxF2w.png",
+        src: "https://ik.imagekit.io/tvlk/ugc-review/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/ugc-photo-ap-southeast-1-581603780057-acd24e232f75f09e/ACCOMMODATION/14247121_ACCOMMODATION_1617374744755_f7e4c4aa18bb7231?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-40,w-640",
         alt: "Pool photo",
     },
     {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aHwhDtLFjYMqIjcdUrrml4IPBDxF2w.png",
+        src: "https://ik.imagekit.io/tvlk/ugc-review/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/ugc-photo-ap-southeast-1-581603780057-acd24e232f75f09e/ACCOMMODATION/14766987_ACCOMMODATION_1558202596574_3eb7144386abb234?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-40,w-640",
         alt: "Room interior photo",
     },
     {
-        src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-aHwhDtLFjYMqIjcdUrrml4IPBDxF2w.png",
+        src: "https://ik.imagekit.io/tvlk/ugc-review/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/ugc-photo-ap-southeast-1-581603780057-acd24e232f75f09e/ACCOMMODATION/16676105_ACCOMMODATION_1533431708302_a9469dd074234a6a?_src=imagekit&tr=dpr-2,c-at_max,f-jpg,h-360,pr-true,q-40,w-640",
         alt: "Living area photo",
     },
 ]
@@ -63,25 +63,114 @@ const aspectRatings = [
     { aspect: "Service", rating: 5 },
 ]
 
+const dummyReviews = [
+    {
+        id: 1,
+        name: "N***a",
+        profile: "This is a guest profile.",
+        rating: 9.7,
+        review: "Pricy but satisfying to stay with family. Very recomended, I except the meals less variety the restaurant very crowded.",
+        language: "en",
+        category: "positive",
+        date: "2024-04-01",
+        tags: ["Kids Friendly", "Friendly Staffs"]
+    },
+    {
+        id: 2,
+        name: "a***y",
+        profile: "This is a guest profile.",
+        rating: 10,
+        review: "Nice nice nice family holiday",
+        language: "en",
+        category: "positive",
+        date: "2024-03-31",
+        tags: ["Complete Facilities", "Comfortable Room"]
+    },
+    {
+        id: 3,
+        name: "R***n",
+        profile: "Business traveler",
+        rating: 8.5,
+        review: "Sangat nyaman untuk menginap, pelayanan ramah.",
+        language: "id",
+        category: "positive",
+        date: "2024-03-30",
+        tags: ["Friendly Staffs", "Excellent Service"]
+    },
+    {
+        id: 4,
+        name: "M***k",
+        profile: "Solo traveler",
+        rating: 6.5,
+        review: "Room service was slow, but the location is great.",
+        language: "en",
+        category: "negative",
+        date: "2024-03-29",
+        tags: ["Complete Facilities"]
+    },
+    {
+        id: 5,
+        name: "S***a",
+        profile: "Family vacation",
+        rating: 9.2,
+        review: "Perfect for family vacation! Kids loved the pool.",
+        language: "en",
+        category: "positive",
+        date: "2024-03-28",
+        tags: ["Kids Friendly", "Complete Facilities"]
+    }
+];
+
 function HotelReviews({ data }: { data: any }) {
     const [selectedTag, setSelectedTag] = useState("All")
+    const [sortBy, setSortBy] = useState("recent")
+    const [category, setCategory] = useState("all")
+    const [language, setLanguage] = useState("en")
+    const [currentPage, setCurrentPage] = useState(1)
+    const itemsPerPage = 2
+
+    const filteredReviews = dummyReviews
+        .filter(review => {
+            if (selectedTag === "All") return true;
+            return review.tags.includes(selectedTag);
+        })
+        .filter(review => {
+            if (category === "all") return true;
+            return review.category === category;
+        })
+        .filter(review => {
+            if (language === "all") return true;
+            return review.language === language;
+        })
+        .sort((a, b) => {
+            switch (sortBy) {
+                case "recent":
+                    return new Date(b.date).getTime() - new Date(a.date).getTime();
+                case "highest":
+                    return b.rating - a.rating;
+                case "lowest":
+                    return a.rating - b.rating;
+                default:
+                    return 0;
+            }
+        });
+
+    const totalPages = Math.ceil(filteredReviews.length / itemsPerPage);
+    const currentReviews = filteredReviews.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
     return (
         <div className="mt-8">
             <h2 className="text-xl font-bold mb-6">Reviews from Guests</h2>
 
-            {/* Guest Photos */}
             <div className="mb-8">
                 <h3 className="text-lg font-semibold mb-4">Most Recent Photos by Guests</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                     {guestPhotos.map((photo, index) => (
                         <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
                             <Image src={photo.src || "/placeholder.svg"} alt={photo.alt} fill className="object-cover" />
-                            {index === guestPhotos.length - 1 && (
-                                <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                                    <span className="text-white font-medium">+31 Photos</span>
-                                </div>
-                            )}
                         </div>
                     ))}
                 </div>
@@ -96,7 +185,7 @@ function HotelReviews({ data }: { data: any }) {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="flex flex-col items-center gap-4">
                             <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center">
-                                <span className="text-4xl font-bold text-white">9.0</span>
+                                <span className="text-4xl font-bold text-white">{data?.review_ratings}</span>
                             </div>
                             <div>
                                 <div className="text-2xl font-bold text-blue-600">Impressive</div>
@@ -166,7 +255,7 @@ function HotelReviews({ data }: { data: any }) {
                 </div>
 
                 <div className="flex flex-wrap gap-4">
-                    <Select defaultValue="recent">
+                    <Select value={sortBy} onValueChange={setSortBy}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Sort by" />
                         </SelectTrigger>
@@ -177,7 +266,7 @@ function HotelReviews({ data }: { data: any }) {
                         </SelectContent>
                     </Select>
 
-                    <Select defaultValue="all">
+                    <Select value={category} onValueChange={setCategory}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Category" />
                         </SelectTrigger>
@@ -188,11 +277,12 @@ function HotelReviews({ data }: { data: any }) {
                         </SelectContent>
                     </Select>
 
-                    <Select defaultValue="en">
+                    <Select value={language} onValueChange={setLanguage}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Language" />
                         </SelectTrigger>
                         <SelectContent>
+                            <SelectItem value="all">All Languages</SelectItem>
                             <SelectItem value="en">English</SelectItem>
                             <SelectItem value="id">Bahasa Indonesia</SelectItem>
                         </SelectContent>
@@ -202,71 +292,59 @@ function HotelReviews({ data }: { data: any }) {
 
             {/* Review List */}
             <div className="space-y-6">
-                {/* Sample reviews */}
-                <div className="border rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-4">
-                        <div>
-                            <div className="font-medium">N***a</div>
-                            <div className="text-sm text-gray-500">This is a guest profile.</div>
+                {currentReviews.map((review) => (
+                    <div key={review.id} className="border rounded-lg p-4">
+                        <div className="flex items-start justify-between mb-4">
+                            <div>
+                                <div className="font-medium">{review.name}</div>
+                                <div className="text-sm text-gray-500">{review.profile}</div>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <Star className="h-5 w-5 fill-blue-600 text-blue-600" />
+                                <span className="font-medium">{review.rating} / 10</span>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Star className="h-5 w-5 fill-blue-600 text-blue-600" />
-                            <span className="font-medium">9.7 / 10</span>
+                        <p className="mb-4">{review.review}</p>
+                        <div className="flex gap-2 mb-4">
+                            {review.tags.map((tag, index) => (
+                                <span key={index} className="text-sm bg-gray-100 px-2 py-1 rounded">
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
+                        <Button variant="ghost" size="sm" className="gap-2">
+                            <ThumbsUp className="h-4 w-4" />
+                            Like this review?
+                        </Button>
                     </div>
-                    <p className="mb-4">
-                        Pricy but satisfying to stay with family. Very recomended, I except the meals less variety the restaurant
-                        very crowded.
-                    </p>
-                    <Button variant="ghost" size="sm" className="gap-2">
-                        <ThumbsUp className="h-4 w-4" />
-                        Like this review?
-                    </Button>
-                </div>
-
-                <div className="border rounded-lg p-4">
-                    <div className="flex items-start justify-between mb-4">
-                        <div>
-                            <div className="font-medium">a***y</div>
-                            <div className="text-sm text-gray-500">This is a guest profile.</div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Star className="h-5 w-5 fill-blue-600 text-blue-600" />
-                            <span className="font-medium">10 / 10</span>
-                        </div>
-                    </div>
-                    <p className="mb-4">Nice nice nice family holiday</p>
-                    <Button variant="ghost" size="sm" className="gap-2">
-                        <ThumbsUp className="h-4 w-4" />
-                        Like this review?
-                    </Button>
-                </div>
+                ))}
             </div>
+
             <div className="mt-8 flex justify-end">
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem>
-                            <PaginationPrevious href="#" />
+                            <PaginationPrevious 
+                                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                                className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                            />
                         </PaginationItem>
+                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                            <PaginationItem key={page}>
+                                <PaginationLink
+                                    onClick={() => setCurrentPage(page)}
+                                    isActive={currentPage === page}
+                                    className="cursor-pointer"
+                                >
+                                    {page}
+                                </PaginationLink>
+                            </PaginationItem>
+                        ))}
                         <PaginationItem>
-                            <PaginationLink href="#" isActive>
-                                1
-                            </PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">2</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">3</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">4</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationLink href="#">5</PaginationLink>
-                        </PaginationItem>
-                        <PaginationItem>
-                            <PaginationNext href="#" />
+                            <PaginationNext
+                                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                            />
                         </PaginationItem>
                     </PaginationContent>
                 </Pagination>

@@ -80,9 +80,14 @@ export const useSearchStore = create<SearchState>()(
       
       setLocation: (location) => set({ location }),
       setDateRange: (range) => set({ dateRange: range }),
-      setGuests: (adults, children, rooms) => set({ adults, children, rooms }),
+      setGuests: (adults: number, children: number, rooms: number) => set((prev) => ({ 
+        adults: Math.max(1, adults), 
+        children: Math.max(0, children),
+        rooms: Math.max(1, rooms)
+      })),
       setLastSearch: (destination) => set({ lastSearch: destination }),
-      search: (params) => set({
+      search: (params) => set((prev) => ({
+        ...prev,
         location: params.location,
         dateRange: {
           from: params.checkIn,
@@ -91,7 +96,7 @@ export const useSearchStore = create<SearchState>()(
         adults: Math.floor(params.guests / 2),
         children: params.guests % 2,
         rooms: params.rooms,
-      }),
+      })),
     }),
     {
       name: 'search-storage',
