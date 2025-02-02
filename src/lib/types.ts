@@ -1,5 +1,6 @@
 export interface Destination {
     name: string
+    location: string
     region: string
     country: string
     type: "City" | "Region"
@@ -13,11 +14,19 @@ export interface SearchHistory {
 
 
 export interface Hotel {
-    id: string
-    name: string
-    location: string
-    price: number
-    rating: number
-    image: string
-    rooms: number
+  id_hotel: number;
+  name: string;
+  travel_rating: string;
+  rating: number;
+  tag: string;
+  discount: boolean;
+  price_ori: number;
+  price_discount: number | null;
+  travel_review_origin: string;
+  type: string;
+  date_available: string;
+  room_available: number;
+  tax_fee: number;
+  address: string;
+  mean_review: number | null;
 }

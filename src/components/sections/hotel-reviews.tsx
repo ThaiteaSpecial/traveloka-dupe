@@ -63,7 +63,7 @@ const aspectRatings = [
     { aspect: "Service", rating: 5 },
 ]
 
-function HotelReviews() {
+function HotelReviews({ data }: { data: any }) {
     const [selectedTag, setSelectedTag] = useState("All")
 
     return (
@@ -88,64 +88,69 @@ function HotelReviews() {
             </div>
 
             {/* Overall Rating */}
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="mb-8">
 
                 <div className="space-y-4">
                     <h3 className="text-xl font-semibold">Overall Rating & Reviews</h3>
                     <div className="text-gray-600 text-sm">From <span className="font-bold">6,309</span> verified guests reviews</div>
-                    <div className="flex items-center gap-4">
-                        <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center">
-                            <span className="text-4xl font-bold text-white">9.0</span>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="flex flex-col items-center gap-4">
+                            <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center">
+                                <span className="text-4xl font-bold text-white">9.0</span>
+                            </div>
+                            <div>
+                                <div className="text-2xl font-bold text-blue-600">Impressive</div>
+                            </div>
+                        </div>
+                        <div className="space-y-2">
+                            {ratingCategories.map((category) => (
+                                <div key={category.label} className="flex items-center justify-between">
+                                    <span>{category.label}</span>
+                                    <div className="flex items-center gap-2">
+                                        <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
+                                            <div
+                                                className="h-full bg-blue-600"
+                                                style={{
+                                                    width: `${(category.count / ratingCategories[0].count) * 100}%`,
+                                                }}
+                                            />
+                                        </div>
+                                        <span className="text-gray-600 min-w-[4ch]">{category.count}</span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                         <div>
-                            <div className="text-2xl font-bold text-blue-600">Impressive</div>
+                            <div className="space-y-3">
+                                {aspectRatings.map((aspect) => (
+                                    <div key={aspect.aspect} className="flex items-center justify-between">
+                                        <span>{aspect.aspect}</span>
+                                        <div className="flex">
+                                            {Array.from({ length: 5 }).map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className={`h-5 w-5 ${i < aspect.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"
+                                                        }`}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
-                    <div className="space-y-2">
-                        {ratingCategories.map((category) => (
-                            <div key={category.label} className="flex items-center justify-between">
-                                <span>{category.label}</span>
-                                <div className="flex items-center gap-2">
-                                    <div className="w-32 h-2 bg-gray-200 rounded-full overflow-hidden">
-                                        <div
-                                            className="h-full bg-blue-600"
-                                            style={{
-                                                width: `${(category.count / ratingCategories[0].count) * 100}%`,
-                                            }}
-                                        />
-                                    </div>
-                                    <span className="text-gray-600 min-w-[4ch]">{category.count}</span>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
                 </div>
-
-                {/* <div>
-                    <div className="space-y-3">
-                        {aspectRatings.map((aspect) => (
-                            <div key={aspect.aspect} className="flex items-center justify-between">
-                                <span>{aspect.aspect}</span>
-                                <div className="flex">
-                                    {Array.from({ length: 5 }).map((_, i) => (
-                                        <Star
-                                            key={i}
-                                            className={`h-5 w-5 ${i < aspect.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"
-                                                }`}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
             </div>
 
             {/* Review Filters */}
             <div className="space-y-4 mb-8 border rounded-lg p-4">
                 <h3 className="font-semibold">Show reviews that mention...</h3>
                 <div className="flex flex-wrap gap-2">
-                    <Button variant={selectedTag === "All" ? "default" : "outline"} onClick={() => setSelectedTag("All")}>
+                    <Button 
+                        variant={selectedTag === "All" ? "default" : "outline"} 
+                        onClick={() => setSelectedTag("All")} 
+                        className={selectedTag === "All" ? "bg-blue-custom hover:bg-blue-custom font-bold text-white" : "hover:bg-gray-100"}
+                    >
                         All
                     </Button>
                     {reviewTags.map((tag) => (
@@ -153,6 +158,7 @@ function HotelReviews() {
                             key={tag.label}
                             variant={selectedTag === tag.label ? "default" : "outline"}
                             onClick={() => setSelectedTag(tag.label)}
+                            className={selectedTag === tag.label ? "bg-blue-custom hover:bg-blue-custom font-bold text-white" : "hover:bg-gray-100"}
                         >
                             {tag.label} ({tag.count})
                         </Button>
@@ -236,7 +242,7 @@ function HotelReviews() {
                     </Button>
                 </div>
             </div>
-            <div className="mt-8 flex justify-center">
+            <div className="mt-8 flex justify-end">
                 <Pagination>
                     <PaginationContent>
                         <PaginationItem>
@@ -254,7 +260,10 @@ function HotelReviews() {
                             <PaginationLink href="#">3</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationEllipsis />
+                            <PaginationLink href="#">4</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink href="#">5</PaginationLink>
                         </PaginationItem>
                         <PaginationItem>
                             <PaginationNext href="#" />

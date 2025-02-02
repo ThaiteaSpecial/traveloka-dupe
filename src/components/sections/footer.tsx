@@ -71,11 +71,11 @@ export function Footer() {
                         <div className="mt-6">
                             <h4 className="font-semibold mb-4">Payment Partners</h4>
                             <div className="grid grid-cols-4 gap-2">
-                                {['tpay', 'visa', 'mastercard', 'jcb', 'amex', 'bca', 'mandiri', 'bri', 'bni', 'bsi', 'permata', 'alto', 'gopay', 'alfamart', 'link', 'indomaret'].map((partner) => (
+                                {/* {['tpay', 'visa', 'mastercard', 'jcb', 'amex', 'bca', 'mandiri', 'bri', 'bni', 'bsi', 'permata', 'alto', 'gopay', 'alfamart', 'link', 'indomaret'].map((partner) => (
                                     <div key={partner} className="bg-white p-2 rounded">
                                         <img src={`/payment/${partner}.png`} alt={partner} className="h-6 w-auto" />
                                     </div>
-                                ))}
+                                ))} */}
                             </div>
                         </div>
                     </div>

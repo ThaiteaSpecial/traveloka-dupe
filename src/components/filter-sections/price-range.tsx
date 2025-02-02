@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Slider } from "@/components/ui/slider"
+import * as SliderPrimitive from "@radix-ui/react-slider"
 
 interface PriceRangeProps {
   onPriceChange: (range: number[]) => void
@@ -32,7 +33,17 @@ function PriceRange({ onPriceChange }: PriceRangeProps) {
       </div>
       <p className="text-sm text-muted-foreground mb-4">Per room, per night</p>
       <div className="space-y-4">
-        <Slider value={priceRange} min={0} max={16000000} step={100000} onValueChange={handlePriceChange} />
+        <Slider
+          value={priceRange}
+          min={0}
+          max={16000000}
+          step={100000}
+          onValueChange={handlePriceChange}
+          className="relative"
+        >
+          <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+          <SliderPrimitive.Thumb className="block h-4 w-4 rounded-full border border-primary/50 bg-background shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
+        </Slider>
         <div className="flex gap-4">
           <div className="flex-1">
             <Input

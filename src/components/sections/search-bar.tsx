@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Calendar } from "@/components/ui/calendar"
@@ -8,6 +7,7 @@ import { MapPin, CalendarIcon, Users, Search } from "lucide-react"
 import { format } from "date-fns"
 import type { SearchParams } from "@/lib/types"
 import { GuestSelector } from "./guest-selector"
+import { useSearchStore } from "@/store/useSearchStore"
 
 interface SearchBarProps {
   initialParams: SearchParams
@@ -15,32 +15,37 @@ interface SearchBarProps {
 }
 
 function SearchBar({ initialParams, onSearch }: SearchBarProps) {
-  const [location, setLocation] = useState(initialParams.location)
-  const [dateRange, setDateRange] = useState<{
-    from: Date
-    to: Date
-  }>({
-    from: initialParams.checkIn,
-    to: initialParams.checkOut,
-  })
-  const [adults, setAdults] = useState(1)
-  const [children, setChildren] = useState(0)
-  const [rooms, setRooms] = useState(initialParams.rooms)
+  const {
+    location,
+    dateRange,
+    adults,
+    children,
+    rooms,
+    setLocation,
+    setDateRange,
+    setGuests,
+    search
+  } = useSearchStore()
 
   const handleGuestUpdate = (type: "adults" | "children" | "rooms", value: number) => {
-    if (type === "adults") setAdults(value)
-    if (type === "children") setChildren(value)
-    if (type === "rooms") setRooms(value)
+    if (type === "adults") setGuests(value, children, rooms)
+    if (type === "children") setGuests(adults, value, rooms)
+    if (type === "rooms") setGuests(adults, children, value)
   }
 
   const handleSearch = () => {
-    onSearch({
-      location,
-      checkIn: dateRange.from,
-      checkOut: dateRange.to,
-      rooms,
-      guests: adults + children,
-    })
+    if (dateRange?.from && dateRange?.to) {
+      const searchParams = {
+        location,
+        checkIn: dateRange.from,
+        checkOut: dateRange.to,
+        rooms,
+        guests: adults + children,
+      }
+
+      search(searchParams)
+      onSearch(searchParams)
+    }
   }
 
   return (
@@ -70,7 +75,7 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-full justify-start font-normal">
               <CalendarIcon className="mr-2 h-4 w-4" />
-              {dateRange.from && dateRange.to
+              {dateRange?.from && dateRange?.to
                 ? `${format(dateRange.from, "MMM dd")} - ${format(dateRange.to, "MMM dd")}`
                 : "Select dates"}
             </Button>
@@ -79,10 +84,10 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
             <Calendar
               initialFocus
               mode="range"
-              defaultMonth={dateRange.from}
+              defaultMonth={dateRange?.from || new Date()}
               selected={{
-                from: dateRange.from,
-                to: dateRange.to,
+                from: dateRange?.from,
+                to: dateRange?.to,
               }}
               onSelect={(range) => {
                 if (range?.from && range?.to) {
@@ -98,9 +103,8 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
           <PopoverTrigger asChild>
             <Button variant="outline" className="w-full justify-start font-normal">
               <Users className="mr-2 h-4 w-4" />
-              {`${adults} Adult${adults > 1 ? "s" : ""}, ${children} Child${
-                children > 1 ? "ren" : ""
-              }, ${rooms} Room${rooms > 1 ? "s" : ""}`}
+              {`${adults} Adult${adults > 1 ? "s" : ""}, ${children} Child${children > 1 ? "ren" : ""
+                }, ${rooms} Room${rooms > 1 ? "s" : ""}`}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80" align="start">
@@ -109,13 +113,17 @@ function SearchBar({ initialParams, onSearch }: SearchBarProps) {
               children={children}
               rooms={rooms}
               onUpdate={handleGuestUpdate}
-              onDone={() => {}}
+              onDone={() => { }}
             />
           </PopoverContent>
         </Popover>
       </div>
 
-      <Button onClick={handleSearch} className="bg-blue-600 hover:bg-blue-700">
+      <Button
+        onClick={handleSearch}
+        className="bg-blue-custom hover:bg-blue-custom-dark font-semibold"
+        disabled={!dateRange?.from || !dateRange?.to || !location}
+      >
         <Search className="h-4 w-4 mr-2" />
         Search Hotels
       </Button>

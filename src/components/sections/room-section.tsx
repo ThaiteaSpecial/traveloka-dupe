@@ -9,12 +9,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Info, Users, Bed, Bath, Wind, Cigarette } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
-function RoomSection() {
+function RoomSection({ data }: { data: any }) {
     const [selectedFilters, setSelectedFilters] = useState<string[]>([])
 
     return (
         <div className="mt-8">
-            <h2 className="text-xl font-bold mb-6">Available Room Types in The Trans Luxury Hotel</h2>
+            <h2 className="text-xl font-bold mb-6">Available Room Types in {data.name_hotel}</h2>
             {/* Filter Section */}
             <div className="flex items-center justify-between mb-6">
                 <div className="space-y-2">
@@ -133,68 +133,77 @@ function RoomSection() {
                             </div>
 
                             {/* With Breakfast Option */}
-                            <div className="p-6 relative">
-                                <div className="grid grid-cols-[2fr,1fr,auto] gap-8">
-                                    <div>
-                                        <div className="text-sm font-medium mb-2 font-semibold">Premier Smoking Room</div>
-                                        <div className="text-sm text-muted-foreground">Breakfast included for 1 pax</div>
-                                        <div className="flex items-center gap-2 mt-2">
-                                            <Bed className="h-5 w-5 text-gray-500" />
-                                            <span className="text-xs text-muted-foreground">1 twin bed</span>
-                                        </div>
-                                        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
-                                            <Info className="h-4 w-4" />
-                                            <span>This reservation is non-refundable.</span>
-                                        </div>
-                                    </div>
+                            {
+                                data?.rooms_options.map((room: any, index: number) => (
+                                    <>
+                                        <div className="p-6 relative">
+                                            <div className="grid grid-cols-[2fr,1fr,auto] gap-8">
+                                                <div>
+                                                    <div className="text-sm font-medium mb-2 font-semibold">{room.title_room}</div>
+                                                    <div className="text-sm text-muted-foreground">{room.sub_title_room}</div>
+                                                    <div className="flex items-center gap-2 mt-2">
+                                                        <Bed className="h-5 w-5 text-gray-500" />
+                                                        <span className="text-xs text-muted-foreground">{room.bed_count} {room.bed_type}</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
+                                                        <Info className="h-4 w-4" />
+                                                        {
+                                                            room.is_refund ? "Free cancellation available" : "This reservation is non-refundable"
+                                                        }
+                                                    </div>
+                                                </div>
 
-                                    <div className="flex items-center justify-center">
-                                        <div className="flex items-center gap-2">
-                                            <Users className="h-5 w-5 text-gray-500" />
-                                            <Users className="h-5 w-5 text-gray-500" />
-                                        </div>
-                                    </div>
+                                                <div className="flex items-center justify-center">
+                                                    <div className="flex items-center gap-2">
+                                                        {[...Array(room.guest_count)].map((_, i) => (
+                                                            <Users key={i} className="h-5 w-5 text-gray-500" />
+                                                        ))}
+                                                    </div>
+                                                </div>
 
-                                    <div className="flex flex-col items-end justify-center">
-                                        <div className="text-xs text-muted-foreground line-through">Rp 3,253,740</div>
-                                        <div className="text-xl font-bold text-orange-500">Rp 2,943,860</div>
-                                        <div className="text-xs text-muted-foreground">Include taxes & fees</div>
-                                        <Button className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2">Choose</Button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Without Breakfast Option */}
-                            <div className="p-6">
-                                <div className="grid grid-cols-[2fr,1fr,auto] gap-8">
-                                    <div>
-                                        <div className="text-sm font-medium mb-2 font-semibold">Premier Smoking Room Only</div>
-                                        <div className="text-sm text-muted-foreground">Without Breakfast</div>
-                                        <div className="flex items-center gap-2 mt-2">
-                                            <Bed className="h-5 w-5 text-gray-500" />
-                                            <span className="text-xs text-muted-foreground">1 twin bed</span>
+                                                <div className="flex flex-col items-end justify-center">
+                                                    <div className="text-xs text-muted-foreground line-through">Rp {room.price.toLocaleString('id-ID')}</div>
+                                                    <div className="text-xl font-bold text-orange-500">Rp {(room.price * 0.9).toLocaleString('id-ID')}</div>
+                                                    <div className="text-xs text-muted-foreground">Include taxes & fees</div>
+                                                    <Button className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2">Choose</Button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
-                                            <Info className="h-4 w-4" />
-                                            <span>This reservation is non-refundable.</span>
-                                        </div>
-                                    </div>
 
-                                    <div className="flex items-center justify-center">
-                                        <div className="flex items-center gap-2">
-                                            <Users className="h-5 w-5 text-gray-500" />
-                                            <Users className="h-5 w-5 text-gray-500" />
-                                        </div>
-                                    </div>
+                                        {/* Without Breakfast Option */}
+                                        <div className="p-6">
+                                            <div className="grid grid-cols-[2fr,1fr,auto] gap-8">
+                                                <div>
+                                                    <div className="text-sm font-medium mb-2 font-semibold">Premier Smoking Room Only</div>
+                                                    <div className="text-sm text-muted-foreground">Without Breakfast</div>
+                                                    <div className="flex items-center gap-2 mt-2">
+                                                        <Bed className="h-5 w-5 text-gray-500" />
+                                                        <span className="text-xs text-muted-foreground">1 twin bed</span>
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-xs text-muted-foreground mt-4">
+                                                        <Info className="h-4 w-4" />
+                                                        <span>This reservation is non-refundable.</span>
+                                                    </div>
+                                                </div>
 
-                                    <div className="flex flex-col items-end justify-center">
-                                        <div className="text-xs text-muted-foreground line-through">Rp 2,951,077</div>
-                                        <div className="text-xl font-bold text-orange-500">Rp 2,670,023</div>
-                                        <div className="text-xs text-muted-foreground">Include taxes & fees</div>
-                                        <Button className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2">Choose</Button>
-                                    </div>
-                                </div>
-                            </div>
+                                                <div className="flex items-center justify-center">
+                                                    <div className="flex items-center gap-2">
+                                                        <Users className="h-5 w-5 text-gray-500" />
+                                                        <Users className="h-5 w-5 text-gray-500" />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex flex-col items-end justify-center">
+                                                    <div className="text-xs text-muted-foreground line-through">Rp 2,951,077</div>
+                                                    <div className="text-xl font-bold text-orange-500">Rp 2,670,023</div>
+                                                    <div className="text-xs text-muted-foreground">Include taxes & fees</div>
+                                                    <Button className="bg-blue-custom font-semibold hover:bg-blue-700 text-sm mt-2">Choose</Button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                ))
+                            }
 
                         </div>
                     </div>

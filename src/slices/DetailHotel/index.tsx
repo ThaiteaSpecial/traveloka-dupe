@@ -22,9 +22,11 @@ import { FC, useState, useEffect, useRef } from "react"
 import { Content } from "@prismicio/client"
 import { SliceComponentProps } from "@prismicio/react"
 
+
 export type DetailHotelProps = SliceComponentProps<Content.DetailHotelSlice>
 
 const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
+  console.log("🚀 ~ slice:", slice)
   const [activeTab, setActiveTab] = useState("overview")
   const [activeSection, setActiveSection] = useState("overview")
   const [isScrolled, setIsScrolled] = useState(false)
@@ -102,7 +104,7 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
                 <div className="flex-1">
                   <Button size="lg" variant="outline" className="w-full justify-start">
                     <MapPin className="mr-2 h-4 w-4" />
-                    The Trans Luxury Hotel
+                    {slice.primary.name_hotel}
                   </Button>
                 </div>
                 <div className="flex-1">
@@ -117,8 +119,8 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
                   </Button>
                 </div>
               </div>
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                <Search className="mr-2 h-4 w-4" />
+              <Button size="lg" className="bg-blue-custom hover:bg-blue-700 font-bold">
+                <Search className="mr-2 h-4 w-4 font-bold" />
                 Search Hotels
               </Button>
             </div>
@@ -189,7 +191,7 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
               Buahbatu (167 Hotels)
             </Link>
             <ChevronRight className="h-4 w-4 mx-2" />
-            <span>The Trans Luxury Hotel</span>
+            <span>{slice.primary.name_hotel}</span>
           </div>
         </div>
 
@@ -197,31 +199,31 @@ const DetailHotel: FC<DetailHotelProps> = ({ slice }) => {
           <div className="flex gap-8">
             <div className="flex-1">
               <div id="overview" ref={overviewRef}>
-                <HotelGallery />
+                <HotelGallery images={slice.primary.images} />
                 <div className="bg-white border-t border-l border-r border-gray-200 rounded-t-lg p-4">
-                  <HotelHeader />
-                  <HotelInfo />
+                  <HotelHeader hotel={slice.primary} />
+                  <HotelInfo hotel={slice.primary} />
                 </div>
               </div>
               <div id="rooms" className="bg-white border-l border-r border-gray-200 p-4" ref={roomsRef}>
-                <RoomSection />
+                <RoomSection data={slice.primary}/>
               </div>
               <div id="location" className="bg-white border-l border-r border-gray-200 p-4" ref={locationRef}>
-                <HotelLocation />
+                <HotelLocation data={slice.primary} />
               </div>
               <div id="facilities" className="bg-white border-l border-r border-gray-200 p-4" ref={facilitiesRef}>
-                <HotelFacilities />
+                <HotelFacilities data={slice.primary} />
               </div>
               <div id="policy" className="bg-white border-l border-r border-gray-200 p-4" ref={policyRef}>
-                <HotelPolicy />
+                <HotelPolicy data={slice.primary} />
               </div>
               <div id="reviews" className="bg-white border-l border-r border-gray-200 p-4" ref={reviewsRef}>
-                <HotelReviews />
+                <HotelReviews data={slice.primary} />
               </div>
-              <div className="bg-white border-l border-r border-b rounded-b-lg border-gray-200 p-4">
+              <div className="bg-white border-l border-r border-b rounded-b-lg border-gray-200">
                 {/* <SimilarHotels /> */}
-                <HotelCTA />
-                <PopularHotels />
+                <HotelCTA data={slice.primary} />
+                <PopularHotels data={slice.primary} />
               </div>
             </div>
 

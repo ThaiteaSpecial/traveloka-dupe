@@ -1,7 +1,7 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge, Building2, Clock, FileText, Wallet, Info, Coffee } from "lucide-react"
 
-function HotelPolicy() {
+function HotelPolicy({ data }: { data: any }) {
     return (
         <div className="mt-8">
 
@@ -71,7 +71,7 @@ function HotelPolicy() {
                                 <div>Yes, some room provide breakfast</div>
                             </div>
                             <div className="grid sm:grid-cols-2 py-3">
-                                <div className="text-gray-600">Available rooms at The Trans Luxury Hotel</div>
+                                <div className="text-gray-600">Available rooms at {data.name_hotel}</div>
                                 <div>280</div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ function HotelPolicy() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
                 <div>
                     <h3 className="text-xl font-bold mb-4 text-gray-900">Frequently Asked Questions</h3>
-                    <p className="text-gray-600 text-sm">Find answers to common questions about your stay at The Trans Luxury Hotel.</p>
+                    <p className="text-gray-600 text-sm">Find answers to common questions about your stay at {data.name_hotel}.</p>
                 </div>
                 <div className="col-span-2">
                     <Accordion type="single" collapsible className="w-full space-y-4">
@@ -92,7 +92,7 @@ function HotelPolicy() {
                                     <div className="h-8 w-8 rounded-full bg-blue-50 flex items-center justify-center">
                                         <Building2 className="h-4 w-4 text-blue-600" />
                                     </div>
-                                    <span className="font-medium">What are available facilities at The Trans Luxury Hotel?</span>
+                                    <span className="font-medium">What are available facilities at {data.name_hotel}?</span>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-6 py-4 text-gray-600">
@@ -110,7 +110,7 @@ function HotelPolicy() {
                                     <div className="h-8 w-8 rounded-full bg-green-50 flex items-center justify-center">
                                         <Wallet className="h-4 w-4 text-green-600" />
                                     </div>
-                                    <span className="font-medium">How much does it cost to stay at The Trans Luxury Hotel?</span>
+                                    <span className="font-medium">How much does it cost to stay at {data.name_hotel}?</span>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-6 py-4 text-gray-600">
@@ -149,7 +149,7 @@ function HotelPolicy() {
                                     <div className="h-8 w-8 rounded-full bg-orange-50 flex items-center justify-center">
                                         <Coffee className="h-4 w-4 text-orange-600" />
                                     </div>
-                                    <span className="font-medium">Does The Trans Luxury Hotel provide breakfast?</span>
+                                    <span className="font-medium">Does {data.name_hotel} provide breakfast?</span>
                                 </div>
                             </AccordionTrigger>
                             <AccordionContent className="px-6 py-4 text-gray-600">

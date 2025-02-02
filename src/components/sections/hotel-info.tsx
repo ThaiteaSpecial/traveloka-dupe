@@ -1,8 +1,12 @@
 import { Star, MapPin, Wifi, Car, Coffee, PocketIcon as Pool, Clock, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { PrismicRichText } from "@prismicio/react"
+import { useState } from "react"
 
-function HotelInfo() {
+function HotelInfo({ hotel }: { hotel: any }) {
+    const [isExpanded, setIsExpanded] = useState(false)
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 ">
             <div>
@@ -10,7 +14,7 @@ function HotelInfo() {
                     <div className="absolute inset-0 bg-gradient-to-b from-white/90 to-transparent"></div>
                     <div className="relative flex flex-col sm:flex-row items-center gap-4 rounded-lg mb-6">
                         <div className="bg-white rounded-lg p-3">
-                            <div className="text-2xl font-bold text-blue-600">9.0</div>
+                            <div className="text-2xl font-bold text-blue-custom">{hotel.review_ratings}</div>
                         </div>
                         <div className="text-center sm:text-left">
                             <div className="text-lg font-semibold">Impressive</div>
@@ -42,8 +46,8 @@ function HotelInfo() {
                                 <div className="flex items-center justify-between">
                                     <span className="font-medium text-sm">Intan R.</span>
                                     <div className="flex items-center gap-1">
-                                        <Star className="h-4 w-4 fill-blue-600 text-blue-600" />
-                                        <span className="text-blue-600 text-sm">10 / 10</span>
+                                        <Star className="h-4 w-4 fill-blue-custom text-blue-custom" />
+                                        <span className="text-blue-custom text-sm">10 / 10</span>
                                     </div>
                                 </div>
                                 <p className="text-gray-600 text-sm">
@@ -56,8 +60,8 @@ function HotelInfo() {
                                 <div className="flex items-center justify-between">
                                     <span className="font-medium text-sm">Nurul W.</span>
                                     <div className="flex items-center gap-1">
-                                        <Star className="h-4 w-4 fill-blue-600 text-blue-600" />
-                                        <span className="text-blue-600 text-sm">9.7 / 10</span>
+                                        <Star className="h-4 w-4 fill-blue-custom text-blue-custom" />
+                                        <span className="text-blue-custom text-sm">9.7 / 10</span>
                                     </div>
                                 </div>
                                 <p className="text-gray-600 text-sm">
@@ -72,24 +76,23 @@ function HotelInfo() {
 
             <div className="col-span-2 grid grid-cols-2 gap-4">
                 <div className="border border-gray-200 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center justify-between">
                         <h2 className="text-lg font-semibold">In the Area</h2>
-                        <Button variant="link" className="text-blue-600">
+                        <Button variant="link" className="text-blue-custom p-0 font-semibold">
                             See Map <ChevronRight className="h-4 w-4" />
                         </Button>
                     </div>
 
                     <div className="space-y-4">
                         <div className="flex items-start gap-2">
-                            <MapPin className="h-5 w-5 text-blue-600 mt-1 flex-shrink-0" />
+                            <MapPin className="h-5 w-5 text-blue-custom mt-1 flex-shrink-0" />
                             <div>
-                                <div>Jl. Gatot Subroto No. 289, Buahbatu, Bandung,</div>
-                                <div>Jawa Barat, Indonesia, 40273</div>
+                                {hotel.address}
                             </div>
                         </div>
 
                         <div>
-                            <div className="flex flex-wrap items-center gap-2 text-blue-600 mb-2">
+                            <div className="flex flex-wrap items-center gap-2 text-blue-custom mb-2">
                                 <Badge variant="secondary" className="bg-blue-50">
                                     Strategic Location
                                 </Badge>
@@ -119,38 +122,38 @@ function HotelInfo() {
                 <div className="border border-gray-200 rounded-lg p-4">
                     <div className="flex items-center justify-between mb-4">
                         <h2 className="text-lg font-semibold">Main Facilities</h2>
-                        <Button variant="link" className="text-blue-600">
+                        <Button variant="link" className="text-blue-custom p-0 font-semibold">
                             Read More <ChevronRight className="h-4 w-4" />
                         </Button>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <Wifi className="h-5 w-5 text-blue-600" />
+                                <Wifi className="h-5 w-5 text-blue-custom" />
                             </div>
                             <span>WiFi</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <Car className="h-5 w-5 text-blue-600" />
+                                <Car className="h-5 w-5 text-blue-custom" />
                             </div>
                             <span>Parking</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <Coffee className="h-5 w-5 text-blue-600" />
+                                <Coffee className="h-5 w-5 text-blue-custom" />
                             </div>
                             <span>Restaurant</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <Pool className="h-5 w-5 text-blue-600" />
+                                <Pool className="h-5 w-5 text-blue-custom" />
                             </div>
                             <span>Swimming Pool</span>
                         </div>
                         <div className="flex items-center gap-2">
                             <div className="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                                <Clock className="h-5 w-5 text-blue-600" />
+                                <Clock className="h-5 w-5 text-blue-custom" />
                             </div>
                             <span>24-Hour Front Desk</span>
                         </div>
@@ -158,14 +161,18 @@ function HotelInfo() {
                 </div>
 
                 <div className="col-span-3 border border-gray-200 rounded-lg p-4">
-                    <p className="text-gray-600">
-                        Staying at The Trans Luxury Hotel is a good choice when you are visiting Buahbatu. 24-hours front desk is
-                        available to serve you, from check-in to check-out, or any assistance you need. Should you desire more, do
-                        not hesitate to ask the front desk, we are always ready to accommodate you. WiFi is available within public
-                        areas of the property to help you to stay connected with family and friends.
-                    </p>
-                    <Button variant="link" className="mt-2 h-auto p-0 text-blue-600">
-                        Read More <ChevronRight className="h-4 w-4" />
+                    <div className={`relative ${!isExpanded ? "max-h-[200px] overflow-hidden" : ""}`}>
+                        <PrismicRichText field={hotel.desc_hotel} />
+                        {!isExpanded && (
+                            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent" />
+                        )}
+                    </div>
+                    <Button 
+                        variant="link" 
+                        className="mt-2 h-auto p-0 text-blue-custom"
+                        onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                        {isExpanded ? "Show Less" : "Read More"} <ChevronRight className="h-4 w-4" />
                     </Button>
                 </div>
             </div>

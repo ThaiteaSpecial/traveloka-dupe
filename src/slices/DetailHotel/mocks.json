@@ -848,6 +848,16 @@
 						]
 					}
 				]
+			},
+			"name_hotel": {
+				"__TYPE__": "FieldContent",
+				"value": "shown",
+				"type": "Text"
+			},
+			"address": {
+				"__TYPE__": "FieldContent",
+				"value": "sort",
+				"type": "Text"
 			}
 		},
 		"items": []

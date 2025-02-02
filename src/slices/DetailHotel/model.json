@@ -739,6 +739,20 @@
               }
             }
           }
+        },
+        "name_hotel": {
+          "type": "Text",
+          "config": {
+            "label": "name_hotel",
+            "placeholder": ""
+          }
+        },
+        "address": {
+          "type": "Text",
+          "config": {
+            "label": "address",
+            "placeholder": ""
+          }
         }
       },
       "items": {}

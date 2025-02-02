@@ -12,10 +12,12 @@ import { format } from "date-fns"
 import type { SearchParams, Destination } from "@/lib/types"
 import { GuestSelector } from "./guest-selector"
 import { useRouter } from "next/navigation"
+import { useSearchStore } from '@/store/useSearchStore'
 
 const initialPopularDestinations: Destination[] = [
     {
         name: "Bandung",
+        location: "bandung",
         region: "West Java",
         country: "Indonesia",
         type: "City",
@@ -23,6 +25,7 @@ const initialPopularDestinations: Destination[] = [
     },
     {
         name: "Yogyakarta",
+        location: "yogyakarta",
         region: "Special Region of Yogyakarta",
         country: "Indonesia",
         type: "City",
@@ -30,6 +33,7 @@ const initialPopularDestinations: Destination[] = [
     },
     {
         name: "Jakarta",
+        location: "jakarta",
         region: "",
         country: "Indonesia",
         type: "Region",
@@ -37,6 +41,7 @@ const initialPopularDestinations: Destination[] = [
     },
     {
         name: "Bali",
+        location: "bali",
         region: "",
         country: "Indonesia",
         type: "Region",
@@ -44,6 +49,7 @@ const initialPopularDestinations: Destination[] = [
     },
     {
         name: "Singapore",
+        location: "singapore",
         region: "",
         country: "Singapore",
         type: "Region",
@@ -58,84 +64,72 @@ interface SearchFormProps {
 export function SearchForm({ onSearch }: SearchFormProps) {
     const router = useRouter()
     const [activeTab, setActiveTab] = useState("hotels")
-    const [location, setLocation] = useState("")
-    const [dateRange, setDateRange] = useState<{
-        from: Date | undefined
-        to: Date | undefined
-    }>({
-        from: undefined,
-        to: undefined,
-    })
-    const [guests, setGuests] = useState("1 Adult(s), 0 Child, 1 Room")
-    const [adults, setAdults] = useState(1)
-    const [children, setChildren] = useState(0)
-    const [rooms, setRooms] = useState(1)
     const [isGuestSelectorOpen, setIsGuestSelectorOpen] = useState(false)
     const [isLocationOpen, setIsLocationOpen] = useState(false)
-    const [lastSearch, setLastSearch] = useState<Destination | null>(null)
 
-    useEffect(() => {
-        // Load last search from localStorage
-        const savedHistory = localStorage.getItem("searchHistory")
-        if (savedHistory) {
-            const history = JSON.parse(savedHistory)
-            if (history.lastSearch) {
-                setLastSearch(history.lastSearch)
-            }
-        }
-    }, [])
+    const {
+        location,
+        dateRange,
+        adults,
+        children,
+        rooms,
+        lastSearch,
+        popularDestinations,
+        setLocation,
+        setDateRange,
+        setGuests,
+        setLastSearch,
+        search
+    } = useSearchStore()
 
     const handleGuestUpdate = (type: "adults" | "children" | "rooms", value: number) => {
-        if (type === "adults") setAdults(value)
-        if (type === "children") setChildren(value)
-        if (type === "rooms") setRooms(value)
+        if (type === "adults") setGuests(value, children, rooms)
+        if (type === "children") setGuests(adults, value, rooms)
+        if (type === "rooms") setGuests(adults, children, value)
     }
 
     const handleLocationSelect = (destination: Destination) => {
-        setLocation(destination.name)
+        setLocation(destination.location)
         setIsLocationOpen(false)
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        if (dateRange.from && dateRange.to) {
-            // Save last search to localStorage
+        if (dateRange?.from && dateRange?.to) {
             const searchData: Destination = {
                 name: location,
-                region: "Sample Region", // You would get this from your actual data
-                country: "Indonesia", // You would get this from your actual data
+                location: location,
+                region: "Sample Region", 
+                country: "Indonesia",
                 type: "City",
-                hotels: Math.floor(Math.random() * 5000) + 1000, // Sample hotel count
+                hotels: Math.floor(Math.random() * 5000) + 1000,
             }
 
-            const existingHistory = localStorage.getItem("searchHistory")
-            const history = existingHistory
-                ? JSON.parse(existingHistory)
-                : {
-                    popularDestinations: initialPopularDestinations,
-                }
-
-            history.lastSearch = searchData
-            localStorage.setItem("searchHistory", JSON.stringify(history))
             setLastSearch(searchData)
 
-            onSearch({
+            const searchParams = {
                 location,
                 checkIn: dateRange.from,
                 checkOut: dateRange.to,
                 rooms,
                 guests: adults + children,
-            })
+            }
+
+            // Update store with search params
+            search(searchParams)
+            
+            // Call onSearch callback
+            onSearch(searchParams)
 
             // Redirect to search page
-            const searchParams = new URLSearchParams({
+            const urlSearchParams = new URLSearchParams({
                 checkIn: dateRange.from.toISOString(),
                 checkOut: dateRange.to.toISOString(),
                 rooms: rooms.toString(),
                 guests: (adults + children).toString()
             })
 
-            router.push(`/search/${encodeURIComponent(location)}?${searchParams.toString()}`)
+            router.push(`/search/${encodeURIComponent(location)}?${urlSearchParams.toString()}`)
         }
     }
 

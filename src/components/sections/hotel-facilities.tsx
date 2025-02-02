@@ -64,11 +64,11 @@ const facilityImages = [
     },
 ]
 
-function HotelFacilities() {
+function HotelFacilities({ data }: { data: any }) {
     return (
         <div className="mt-8">
             <div>
-                <h2 className="text-xl font-bold mb-6">All facilities in The Trans Luxury Hotel</h2>
+                <h2 className="text-xl font-bold mb-6">All facilities in {data.name_hotel}</h2>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
                     {facilityImages.map((facility) => (

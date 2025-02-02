@@ -7,7 +7,6 @@ import RecentFilter from "@/components/filter-sections/recent-filter"
 import PriceRange from "@/components/filter-sections/price-range"
 import PopularFilter from "@/components/filter-sections/popular-filter"
 import StarRating from "@/components/filter-sections/star-rating"
-import Amenities from "@/components/filter-sections/amenities"
 
 interface FilterSidebarProps {
     onFilterChange: (filters: any) => void
@@ -62,7 +61,6 @@ export function FilterSidebar({ onFilterChange }: FilterSidebarProps) {
                 <PopularFilter onFilterChange={handlePopularFilterChange} />
             </div>
             <StarRating onFilterChange={handleStarRatingChange} />
-            <Amenities onFilterChange={handleAmenitiesChange} />
         </div>
     )
 }

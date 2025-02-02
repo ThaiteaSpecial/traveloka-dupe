@@ -1176,6 +1176,26 @@ export interface DetailHotelSliceDefaultPrimary {
   image_ratings: prismic.GroupField<
     Simplify<DetailHotelSliceDefaultPrimaryImageRatingsItem>
   >;
+
+  /**
+   * name_hotel field in *DetailHotel → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: detail_hotel.default.primary.name_hotel
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name_hotel: prismic.KeyTextField;
+
+  /**
+   * address field in *DetailHotel → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: detail_hotel.default.primary.address
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  address: prismic.KeyTextField;
 }
 
 /**

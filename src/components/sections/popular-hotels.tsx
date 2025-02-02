@@ -61,7 +61,7 @@ function PopularHotels() {
 
                 <div className="mt-12 text-center">
                     <h3 className="text-xl font-bold mb-4">Haven't found what you're looking for?</h3>
-                    <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
+                    <Button size="lg" className="bg-blue-custom hover:bg-blue-700 font-bold">
                         See Other Accommodations in Bandung
                     </Button>
                 </div>

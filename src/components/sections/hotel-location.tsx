@@ -3,10 +3,10 @@ import { Badge } from "@/components/ui/badge"
 import { Building2, Train, Cross, Ticket, MapPin } from "lucide-react"
 import Image from "next/image"
 
-function HotelLocation() {
+function HotelLocation({ data }: { data: any }) {
     return (
         <div className="mt-8">
-            <h2 className="text-xl font-bold mb-6">What's around The Trans Luxury Hotel</h2>
+            <h2 className="text-xl font-bold mb-6">What's around {data.name_hotel}</h2>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                 <div className="col-span-2">
@@ -25,9 +25,9 @@ function HotelLocation() {
                             Discover More Places
                         </Button>
                     </div>
-                    <div className="mt-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-2 mt-4 text-sm text-gray-600">
                         <MapPin className="h-4 w-4" />
-                        Jalan Rancabentang No. 2 Ciumbuleuit, Ciumbuleuit, Bandung, Jawa Barat, Indonesia, 40142
+                        {data.address_hotel}
                     </div>
                 </div>
 
